@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
 
+export const TxtDefault = styled.span`
+  color: ${(props) => props.padding || "#999999"};
+  font-size: 0.75rem; /* 12px */
+  line-height: 1;
+`;
+
 export const Txt12 = styled.span`
   font-size: 0.75rem; /* 12px */
   line-height: 1rem; /* 16px */
@@ -52,17 +58,41 @@ export const Txt20Bold = styled.span`
   line-height: 1.75rem; /* 28px */
 `;
 
+export const LogoTxt = styled(TxtDefault)`
+  font-size: 3rem;
+  line-height: 5rem;
+  font-weight: 700;
+  Color: #2563eb;
+`;
+
 export const FlexContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: ${(props) => props.width || "fit-content"};
+  height: ${(props) => props.height || "fit-content"};
+  max-width: ${(props) => props.maxWidth || ""};
+  max-height: ${(props) => props.maxHeight || ""};
+  min-width: ${(props) => props.minWidth || ""};
+  min-height: ${(props) => props.minHeight || ""};
+  padding: ${(props) => props.padding || "10px"};
+  margin: ${(props) => props.margin || "10px"};
 `;
 
-export const FlexCenterContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const FlexCenterContainer = styled(FlexContainer)`
   justify-content: center;
   flex-direction: column;
+`;
+
+export const PageLayout = styled(FlexContainer)`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 100px;
+  margin-bottom: 100px;
 `;
 
 export const MainBody = styled(FlexContainer)`
@@ -128,15 +158,23 @@ export const LineEEE = styled.div`
 `;
 
 export const CarouselImg = styled.img`
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 20px;
 `;
 
 export const LoginBtn = styled.button`
-  width: 100%;
-  height: 40px;
-  background-color: #000000;
+  width: 200px;
+  height: 70px;
+  background-color: #2563eb;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
+`;
+
+export const SignupBtn = styled(LoginBtn)`
+  background-color: #f7f7f7;
+  color: #404040;
 `;
