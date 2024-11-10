@@ -47,7 +47,6 @@ export const Txt18Bold = styled.span`
   font-size: 1.125rem; /* 18px */
   line-height: 1.75rem; /* 28px */
 `;
-
 export const Txt20 = styled.span`
   font-size: 1.25rem; /* 20px */
   line-height: 1.75rem; /* 28px */
@@ -57,12 +56,21 @@ export const Txt20Bold = styled.span`
   font-size: 1.25rem; /* 20px */
   line-height: 1.75rem; /* 28px */
 `;
+export const Txt24 = styled.span`
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+`;
+export const Txt24Bold = styled.span`
+  font-weight: 500;
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+`;
 
 export const LogoTxt = styled(TxtDefault)`
   font-size: 3rem;
   line-height: 5rem;
   font-weight: 700;
-  Color: #2563eb;
+  color: #2563eb;
 `;
 
 export const FlexContainer = styled.div`
@@ -75,8 +83,8 @@ export const FlexContainer = styled.div`
   max-height: ${(props) => props.maxHeight || ""};
   min-width: ${(props) => props.minWidth || ""};
   min-height: ${(props) => props.minHeight || ""};
-  padding: ${(props) => props.padding || "10px"};
-  margin: ${(props) => props.margin || "10px"};
+  padding: ${(props) => props.padding || ""};
+  margin: ${(props) => props.margin || ""};
 `;
 
 export const FlexCenterContainer = styled(FlexContainer)`
@@ -93,6 +101,22 @@ export const PageLayout = styled(FlexContainer)`
   padding: 0;
   margin-top: 100px;
   margin-bottom: 100px;
+`;
+
+export const FormLayout = styled(FlexContainer)`
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  margin-top: ${(props) => props.mt || ""};
+  margin-bottom: ${(props) => props.mb || ""};
+`;
+
+export const FormContainer = styled(FlexContainer)`
+  align-items: flex-start;
+  background-color: #f0f0f0;
+  border-radius: 38px;
+  padding: 40px;
+  flex-direction: column;
 `;
 
 export const MainBody = styled(FlexContainer)`
@@ -133,6 +157,25 @@ export const MainBodyFormContent = styled(FlexContainer)`
   flex-direction: row;
   width: 100%;
   justify-content: flex-start;
+`;
+
+export const LoginFormInput = styled.input`
+  width: 100%;
+  min-width: 456px;
+  height: 60px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+export const FormContentVertical = styled(FlexContainer)`
+  align-items: flex-start;
+  width: 100%;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const FormContentLeft = styled(FlexContainer)`
@@ -177,4 +220,28 @@ export const LoginBtn = styled.button`
 export const SignupBtn = styled(LoginBtn)`
   background-color: #f7f7f7;
   color: #404040;
+`;
+
+export const LoginCTA = styled.button`
+  width: 100%;
+  height: 60px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+`;
+
+export const TxtCTA = styled(FlexContainer)`
+  width: 100%;
+  algin-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+`;
+
+export const ForgetPW = styled.a`
+  color: #2563eb;
+  font-size: 20px;
+  text-decoration: underline;
 `;

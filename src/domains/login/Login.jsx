@@ -1,25 +1,36 @@
 import {
-  CarouselImg,
-  FlexContainer,
-  LoginBtn,
+  ForgetPW,
+  FormContainer,
+  FormContentVertical,
+  FormLayout,
+  LoginCTA,
+  LoginFormInput,
   LogoTxt,
   PageLayout,
-  SignupBtn,
-  Txt20Bold,
+  Txt20,
+  Txt24Bold,
+  TxtCTA,
 } from "../../common/common";
 
 function Login() {
   return (
     <PageLayout>
       <LogoTxt>BENTO</LogoTxt>
-      <CarouselImg
-        src="https://img.hankyung.com/photo/202102/AD.25394223.1.jpg"
-        alt="carousel"
-      />
-      <FlexContainer minWidth="500px" width="100%" maxWidth="500px">
-        <LoginBtn><Txt20Bold>로그인</Txt20Bold></LoginBtn>
-        <SignupBtn><Txt20Bold>회원가입</Txt20Bold></SignupBtn>
-      </FlexContainer>
+      <FormContainer>
+        <Txt24Bold>로그인</Txt24Bold>
+        <FormLayout mt="20px" mb="20px">
+          <FormContentVertical>
+            <Txt20>아이디</Txt20>
+            <LoginFormInput type="text" />
+          </FormContentVertical>
+          <FormContentVertical>
+            <Txt20>비밀번호</Txt20>
+            <LoginFormInput type="password" />
+          </FormContentVertical>
+        </FormLayout>
+        <LoginCTA><Txt24Bold>로그인</Txt24Bold></LoginCTA>
+        <TxtCTA><ForgetPW>비밀번호 찾기</ForgetPW></TxtCTA>
+      </FormContainer>
     </PageLayout>
   );
 }
