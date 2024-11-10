@@ -170,6 +170,12 @@ export const LoginFormInput = styled.input`
   margin-bottom: 10px;
 `;
 
+export const FormCheckbox = styled.input`
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+`;
+
 export const FormContentVertical = styled(FlexContainer)`
   align-items: flex-start;
   width: 100%;
@@ -179,9 +185,11 @@ export const FormContentVertical = styled(FlexContainer)`
 `;
 
 export const FormContentLeft = styled(FlexContainer)`
-  width: 200px;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
 `;
 
 export const FormContentRight = styled(FlexContainer)`
@@ -243,5 +251,12 @@ export const TxtCTA = styled(FlexContainer)`
 export const ForgetPW = styled.a`
   color: #2563eb;
   font-size: 20px;
+  text-decoration: underline;
+`;
+
+export const TxtBtn = styled.a`
+  color: ${(props) => props.color || "#999999"};
+  font-size: ${(props) => props.fontSize || "1rem"};
+  line-height: ${(props) => props.lineHeight || "1.5rem"};
   text-decoration: underline;
 `;
