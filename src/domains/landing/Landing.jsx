@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   CarouselImg,
   FlexContainer,
@@ -9,6 +10,17 @@ import {
 } from "../../common/common";
 
 function Landing() {
+
+  const navigate = useNavigate();
+
+  const onClickLoginBtn = () => {
+    navigate('/login');
+  };
+
+  const onClickSignupBtn = () => {
+    navigate('/signup');
+  };
+
   return (
     <PageLayout>
       <LogoTxt>BENTO</LogoTxt>
@@ -18,8 +30,8 @@ function Landing() {
         alt="carousel"
       />
       <FlexContainer minWidth="500px" width="100%" maxWidth="500px">
-        <LoginBtn><Txt20Bold>로그인</Txt20Bold></LoginBtn>
-        <SignupBtn><Txt20Bold>회원가입</Txt20Bold></SignupBtn>
+        <LoginBtn onClick={onClickLoginBtn}><Txt20Bold>로그인</Txt20Bold></LoginBtn>
+        <SignupBtn onClick={onClickSignupBtn}><Txt20Bold>회원가입</Txt20Bold></SignupBtn>
       </FlexContainer>
     </PageLayout>
   );
