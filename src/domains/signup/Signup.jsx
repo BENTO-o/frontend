@@ -16,8 +16,12 @@ import {
 } from "../../common/common";
 import { signup } from './services/index';
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  // const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -35,10 +39,11 @@ function Signup() {
     }));
   };
 
-  const register = useMutation({
+  const onRegister = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
       console.log(data);
+      navigate('/login');
     },
     onError: (error) => {
       console.log('에러 발생! 아래 메시지를 확인해주세요.', error);
@@ -56,7 +61,7 @@ function Signup() {
       alert('모든 항목을 입력해주세요.');
       return;
     } else {
-      register.mutate({ email: formData.email, username: formData.username, password: formData.password });
+      onRegister.mutate({ email: formData.email, username: formData.username, password: formData.password });
     }
   };
 
