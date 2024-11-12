@@ -11,20 +11,17 @@ import { createNote, getNotes } from "./services";
 import dayjs from "dayjs";
 
 function Home() {
-
-  const { data: noteList } = useQuery(
-    ["getUserList"],
-    async () => await getNotes(),
-    {
-      onSuccess: () => {
-        console.log("success");
-      },
-      onError: (e) => {
-        console.error(e);
-      },
-      refetchOnMount: 'always',
-    }
-  );
+  const { data: noteList } = useQuery({
+    queryKey: ["noteList"],
+    queryFn: async () => await getNotes({}),
+    onSuccess: () => {
+      console.log("success");
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+    refetchOnMount: "always",
+  });
 
   const onCreate = useMutation({
     mutationFn: createNote,
