@@ -4,7 +4,8 @@ const withCredentials = true;
 
 // const URL = window.location.href;
 
-const baseURL = "http://221.146.234.20:80";
+// const baseURL = "http://221.146.234.20:80";
+const baseURL = "https://221.146.234.20";
 
 const client = axios.create({
   baseURL,
