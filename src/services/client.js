@@ -1,5 +1,5 @@
 import axios from "axios";
-import https from "https";
+import { Agent } from "https";
 
 
 // const URL = window.location.href;
@@ -11,7 +11,7 @@ const baseURL = "https://221.146.234.20";
 const client = axios.create({
   baseURL : baseURL,
   withCredentials : withCredentials,
-  httpsAgent: new https.Agent({
+  httpsAgent: new Agent({
     rejectUnauthorized: false // 자체 서명 인증서 허용
   })
 });
