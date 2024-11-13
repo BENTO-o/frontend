@@ -47,6 +47,7 @@ function Signup() {
     },
     onError: (error) => {
       console.log('에러 발생! 아래 메시지를 확인해주세요.', error);
+      navigate('/login');
     },
   });
 
