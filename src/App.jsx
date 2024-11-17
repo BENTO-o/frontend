@@ -10,19 +10,17 @@ import Home from "./domains/home/Home";
 const queryClient = new QueryClient();
 
 function App() {
-  const [isLogin, setIsLogin] = useState(!!sessionStorage.getItem("token"));
-
+  const [isLogin, setIsLogin] = useState(!!sessionStorage.getItem('token'));
+  
   useEffect(() => {
-    setIsLogin(!!sessionStorage.getItem("token"));
-  }, []);
+    setIsLogin(!!sessionStorage.getItem('token'));
+  },[]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={isLogin ? <Home /> : <Landing />} /> */}
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={isLogin ? <Home /> : <Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

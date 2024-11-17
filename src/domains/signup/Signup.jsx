@@ -14,7 +14,7 @@ import {
   Txt24Bold,
   TxtBtn,
 } from "../../common/common";
-import { signup } from "./services/index";
+import { signup } from './services/index';
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -23,19 +23,19 @@ function Signup() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    passwordConfirm: "",
+    email: '',
+    username: '',
+    password: '',
+    passwordConfirm: '',
     checkedRule: false,
     checkedPersonalInfo: false,
   });
-
+  
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -43,30 +43,25 @@ function Signup() {
     mutationFn: signup,
     onSuccess: (data) => {
       console.log(data);
-      navigate("/login");
+      navigate('/login');
     },
     onError: (error) => {
-      console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
-      navigate("/login");
+      console.log('에러 발생! 아래 메시지를 확인해주세요.', error);
     },
   });
 
   const onClickSignupBtn = async () => {
     if (formData.password !== formData.passwordConfirm) {
-      alert("비밀번호가 일치하지 않습니다.");
+      alert('비밀번호가 일치하지 않습니다.');
       return;
     } else if (!formData.checkedRule || !formData.checkedPersonalInfo) {
-      alert("약관에 동의해주세요.");
+      alert('약관에 동의해주세요.');
       return;
     } else if (!formData.email || !formData.username || !formData.password) {
-      alert("모든 항목을 입력해주세요.");
+      alert('모든 항목을 입력해주세요.');
       return;
     } else {
-      onRegister.mutate({
-        email: formData.email,
-        username: formData.username,
-        password: formData.password,
-      });
+      onRegister.mutate({ email: formData.email, username: formData.username, password: formData.password });
     }
   };
 
@@ -78,12 +73,7 @@ function Signup() {
         <FormLayout mt="20px" mb="20px">
           <FormContentVertical>
             <Txt20>이메일</Txt20>
-            <LoginFormInput
-              type="text"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
+            <LoginFormInput type="text" name="email" value={formData.email} onChange={handleInputChange} />
           </FormContentVertical>
           {/* <FormContentVertical>
             <Txt20>이름</Txt20>
@@ -91,53 +81,28 @@ function Signup() {
           </FormContentVertical> */}
           <FormContentVertical>
             <Txt20>닉네임</Txt20>
-            <LoginFormInput
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-            />
+            <LoginFormInput type="text" name="username" value={formData.username} onChange={handleInputChange} />
           </FormContentVertical>
           <FormContentVertical>
             <Txt20>비밀번호</Txt20>
-            <LoginFormInput
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
+            <LoginFormInput type="password" name="password" value={formData.password} onChange={handleInputChange} />
           </FormContentVertical>
           <FormContentVertical>
             <Txt20>비밀번호 확인</Txt20>
-            <LoginFormInput
-              type="password"
-              name="passwordConfirm"
-              value={formData.passwordConfirm}
-              onChange={handleInputChange}
-            />
+            <LoginFormInput type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleInputChange} />
           </FormContentVertical>
           <FormContentLeft>
-            <FormCheckbox
-              type="checkbox"
-              name="checkedRule"
-              value={formData.checkedRule}
-              onChange={handleInputChange}
-            />
-            <Txt16>(필수)</Txt16>
-            <TxtBtn>이용약관</TxtBtn>
-            <Txt16>에 동의합니다</Txt16>
-          </FormContentLeft>
-          <FormContentLeft>
-            <FormCheckbox
-              type="checkbox"
-              name="checkedPersonalInfo"
-              value={formData.checkedPersonalInfo}
-              onChange={handleInputChange}
-            />
-            <Txt16>(필수)</Txt16>
-            <TxtBtn>개인정보 수집 이용</TxtBtn>
-            <Txt16>에 동의합니다</Txt16>
-          </FormContentLeft>
+          <FormCheckbox type="checkbox" name="checkedRule" value={formData.checkedRule} onChange={handleInputChange} />
+          <Txt16>(필수)</Txt16>
+          <TxtBtn>이용약관</TxtBtn>
+          <Txt16>에 동의합니다</Txt16>
+        </FormContentLeft>
+        <FormContentLeft>
+          <FormCheckbox type="checkbox" name="checkedPersonalInfo" value={formData.checkedPersonalInfo} onChange={handleInputChange} />
+          <Txt16>(필수)</Txt16>
+          <TxtBtn>개인정보 수집 이용</TxtBtn>
+          <Txt16>에 동의합니다</Txt16>
+        </FormContentLeft>
         </FormLayout>
         <LoginCTA onClick={onClickSignupBtn}>
           <Txt24Bold>회원가입</Txt24Bold>
