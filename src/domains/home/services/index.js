@@ -2,7 +2,7 @@ import client from "../../../services/client";
 
 export const getNotes = async () => {
   const response = await client.get("/notes");
-  return response.data.data;
+  return response.data;
 };
 
 export const createNote = async () => {
