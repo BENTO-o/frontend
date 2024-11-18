@@ -11,10 +11,9 @@ const queryClient = new QueryClient();
 
 function App() {
   const [isLogin, setIsLogin] = useState(!!sessionStorage.getItem('token'));
-  
   useEffect(() => {
     setIsLogin(!!sessionStorage.getItem('token'));
-  },[]);
+  },[isLogin]);
 
   return (
     <QueryClientProvider client={queryClient}>

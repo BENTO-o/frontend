@@ -13,11 +13,10 @@ import {
   TxtCTA,
 } from "../../common/common";
 import { login } from "./services";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  // const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -36,9 +35,10 @@ function Login() {
   const onLogin = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      // sessionStorage.setItem('token', data.accessToken);
+      sessionStorage.setItem('token', data.accessToken);
       console.log(data);
       navigate('/');
+      window.location.reload();
     },
     onError: (error) => {
       console.log('에러 발생! 아래 메시지를 확인해주세요.', error);

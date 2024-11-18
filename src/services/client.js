@@ -4,7 +4,7 @@ import axios from "axios";
 // const baseURL = "http://221.146.234.20:80";
 
 const withCredentials = true;
-const baseURL = "https://221.146.234.20";
+const baseURL = "https://bento-o.site";
 
 const client = axios.create({
   baseURL : baseURL,
