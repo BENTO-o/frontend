@@ -1,14 +1,12 @@
 import { useState } from "react";
-import {
-  LoginCTA,
-  LogoTxt,
-  PageLayout,
-  Txt20,
-  Txt24Bold,
-} from "../../common/common";
+import { FlexContainer, PageLayout } from "../../common/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createNote, getNotes } from "./services";
-import dayjs from "dayjs";
+
+import { LeftSidebar } from "../../common/components/LeftSidebar";
+import { TopBar } from "../../common/components/TopBar";
+import { Carousel } from "../../common/components/Carousel";
+import { NoteList } from "./components/NoteList";
 
 function Home() {
   const { data: noteList } = useQuery({
@@ -38,19 +36,34 @@ function Home() {
   };
 
   return (
-    <PageLayout>
-      <LogoTxt>BENTO</LogoTxt>
-      {noteList &&
+    <FlexContainer width="100vw" height="100vh">
+      {/* Left 메뉴 컴포넌트로 분리 */}
+      <LeftSidebar />
+
+      <FlexContainer
+        flexDirection="column"
+        width="100%"
+        height="100%"
+        justifyContent="flex-start"
+      >
+        <TopBar />
+
+        <Carousel />
+
+        <NoteList />
+
+        {/* {noteList &&
         noteList.map((note) => (
           <div key={note.id}>
             <Txt20>{note.title}</Txt20>
             <Txt20>{dayjs(note.createdAt).toString()}</Txt20>
           </div>
-        ))}
-      <LoginCTA onClick={onClickCreate}>
+        ))} */}
+        {/* <LoginCTA onClick={onClickCreate}>
         <Txt24Bold>노트 생성하기</Txt24Bold>
-      </LoginCTA>
-    </PageLayout>
+      </LoginCTA> */}
+      </FlexContainer>
+    </FlexContainer>
   );
 }
 

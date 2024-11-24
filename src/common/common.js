@@ -75,8 +75,8 @@ export const LogoTxt = styled(TxtDefault)`
 
 export const FlexContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: ${(props) => props.alignItems || "center"};
+  justify-content: ${(props) => props.justifyContent || "space-between"};
   width: ${(props) => props.width || "fit-content"};
   height: ${(props) => props.height || "fit-content"};
   max-width: ${(props) => props.maxWidth || ""};
@@ -85,6 +85,125 @@ export const FlexContainer = styled.div`
   min-height: ${(props) => props.minHeight || ""};
   padding: ${(props) => props.padding || ""};
   margin: ${(props) => props.margin || ""};
+  flex-direction: ${(props) => props.flexDirection || ""};
+`;
+
+export const SearchbarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 400px; // 원하는 검색창 너비로 설정
+  height: 40px; // 검색창 높이
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding-right: 3px;
+  padding-left: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+`;
+
+export const SearchInput = styled.input`
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding-left: 10px; // 아이콘과의 간격 조정
+  color: #333;
+  &::placeholder {
+    color: #aaa; // 플레이스홀더 색상
+  }
+`;
+
+export const SearchIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #2563eb;
+  border-radius: ${(props) => props.borderRadius || "1.5rem"};
+  width: 2.2rem;
+  height: 2.2rem;
+`;
+
+export const TopMenuContainer = styled(FlexContainer)`
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  margin-left: 1rem;
+  margin-right: 1rem;
+`;
+
+export const TopMenu = styled(FlexContainer)`
+  gap: 0.5rem;
+  width: 50%;
+  justify-content: flex-start;
+  margin-left: 1rem;
+`;
+
+// TopMenuItem: 각 메뉴 항목의 스타일
+export const TopMenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 15px;
+  background-color: #b9b9b9;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  &:hover {
+    background-color: #2563eb;
+  }
+`;
+
+export const LeftMenuItem = styled(FlexContainer)`
+  justify-content: flex-start;
+  width: 100%;
+  cursor: pointer;
+`;
+
+export const DirectoryItem = styled(FlexContainer)`
+  justify-content: flex-start;
+  cursor: pointer;
+`;
+
+export const DirectoryContainer = styled(FlexContainer)`
+  width: 13vw;
+  cursor: pointer;
+`;
+
+export const DirectoryList = styled(FlexContainer)`
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const InnerLeftMenu = styled(FlexContainer)`
+  width: 100%;
+  height: ${(props) => props.height || "70vh"};
+  flex-direction: column;
+  padding: 1rem;
+  border-top: ${(props) => props.borderTop || ""};
+`;
+
+export const LeftMenu = styled(FlexContainer)`
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+`;
+
+export const LeftMenuContainer = styled(FlexContainer)`
+  width: 15vw;
+  height: 100vh;
+  border-right: 1px solid #eeeeee;
+  padding-right: 1rem;
+  padding-left: 1rem;
 `;
 
 export const FlexCenterContainer = styled(FlexContainer)`
@@ -208,6 +327,14 @@ export const LineEEE = styled.div`
   margin-bottom: 16px;
 `;
 
+export const VerticalLineEEE = styled.div`
+  height: 100%;
+  background-color: #eeeeee;
+  width: 1px;
+  margin-left: 16px;
+  margin-right: 16px;
+`;
+
 export const CarouselImg = styled.img`
   max-width: 100%;
   max-height: 100%;
@@ -259,4 +386,43 @@ export const TxtBtn = styled.a`
   font-size: ${(props) => props.fontSize || "1rem"};
   line-height: ${(props) => props.lineHeight || "1.5rem"};
   text-decoration: underline;
+`;
+
+export const CustomIcon = styled.img`
+  width: ${(props) => props.width || "1.5rem"};
+  height: ${(props) => props.height || "1.5rem"};
+  margin-right: ${(props) => props.mr || "0.5rem"};
+`;
+
+export const NoteListContainer = styled.div`
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+`;
+
+export const NoteItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  border-bottom: 1px solid #eeeeee;
+  &:last-child {
+    border-bottom: none;  // 마지막 항목은 경계선을 제거
+  }
+`;
+
+export const NoteTitle = styled.span`
+  flex: 2;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+`;
+
+export const NoteInfo = styled.span`
+  flex: 1;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
 `;
