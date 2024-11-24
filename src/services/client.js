@@ -4,7 +4,7 @@ const URL = window.location.href;
 // const baseURL = "http://221.146.234.20:80";
 
 const withCredentials = true;
-const baseURL = URL.substring(7, 16) === "localhost" ? "https://dev.bento-o.site" : "https://bento-o.site";
+const baseURL = URL.substring(7, 16) === "localhost" ? "http://dev.bento-o.site" : "https://stg.bento-o.site";
 
 const client = axios.create({
   baseURL : baseURL,
