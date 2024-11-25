@@ -437,6 +437,13 @@ export const NoteContainer = styled.div`
   width: 80vw;
   margin: 2rem auto;
 `;
+export const DetailMemoContainer = styled.div`
+  padding: 10px;
+  // background-color: #ffffff;
+  // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  // border-radius: 10px;
+  width: 30vw;
+`;
 
 // 폼 그룹 스타일
 export const FormGroup = styled.div`
@@ -677,4 +684,89 @@ export const ControlButton = styled.button`
 export const FormTitleContainer = styled(FlexContainer)`
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+`;
+
+export const MainContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #ffffff;
+  height: 100%;
+`;
+
+export const TitleSection = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const Title = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+export const DateTime = styled.p`
+  font-size: 16px;
+  color: #666;
+`;
+
+export const FieldLabel = styled.p`
+  font-size: 16px;
+  margin-top: 5px;
+  color: #444;
+`;
+
+export const RecordContainer = styled.div`
+  margin-bottom: 30px;
+`;
+
+export const RecordItem = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+export const RecordIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-right: 15px;
+`;
+
+export const RecordText = styled.p`
+  font-size: 14px;
+  line-height: 1.4;
+`;
+
+// export const MemoContainer = styled.div`
+//   margin-bottom: 30px;
+//   border-left: 4px solid #3498db;
+//   padding-left: 15px;
+// `;
+
+export const MemoTitle = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const MemoText = styled.p`
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 5px;
+`;
+
+export const AISummaryContainer = styled.div`
+  border-left: 4px solid #2ecc71;
+  padding-left: 15px;
+`;
+
+export const AISummaryTitle = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const AISummaryText = styled.p`
+  font-size: 14px;
+  line-height: 1.4;
 `;

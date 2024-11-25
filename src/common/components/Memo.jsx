@@ -15,6 +15,8 @@ import {
   Txt16Bold,
   Txt18Bold,
 } from "../common";
+import { useQuery } from "@tanstack/react-query";
+import { getMemos } from "../utils";
 
 export const Memo = () => {
   const [memo, setMemo] = useState("");
@@ -37,6 +39,33 @@ export const Memo = () => {
     setMemoList(memoList.filter((_, index) => index !== indexToDelete)); // 해당 인덱스의 메모를 제외하고 리스트 업데이트
   };
 
+  const { data: memos } = useQuery({
+    queryKey: ["memos"],
+    queryFn: async () => await getMemos(props?.noteData?.noteId),
+    onSuccess: () => {
+      console.log("success");
+      console.log(memos);
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+    refetchOnMount: "always",
+  });
+
+  // const onCreateMemo = useMutation({
+  //   mutationFn: createMemo,
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //   },
+  //   onError: (error) => {
+  //     console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
+  //   },
+  // });
+
+  // const onClickCreateMemo = async () => {
+  //   onLogin.mutate({ noteId: , timestamp: , text: });
+  // };
+
   return (
     <FormGroup>
       <FormTitleContainer>
@@ -48,7 +77,7 @@ export const Memo = () => {
           onChange={(e) => setMemo(e.target.value)}
           placeholder="메모를 작성해주세요..."
         />
-        <AddButton onClick={handleAddMemo}>메모 추가</AddButton>
+        <AddButton onClick={handleAddMemo}> + </AddButton>
       </MemoContainer>
 
       <MemoListContainer>

@@ -42,7 +42,7 @@ export const NoteField = () => {
           placeholder="분야 입력하기"
         />
 
-        <AddButton onClick={handleAddField}>추가</AddButton>
+        <AddButton onClick={handleAddField}> + </AddButton>
       </FlexContainer>
 
       <FieldListContainer>
