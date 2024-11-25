@@ -18,9 +18,25 @@ import Icon_Directory from "../../assets/Directory.svg";
 import Icon_VerticalMore from "../../assets/VerticalMore.svg";
 import Icon_Trash from "../../assets/Trash.svg";
 import "react-datepicker/dist/react-datepicker.css";
+import { useQuery } from "@tanstack/react-query";
+import { getFolders } from "../utils";
 
 export const LeftSidebar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => await getFolders({}),
+    onSuccess: () => {
+      console.log("success");
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+    refetchOnMount: "always",
+  });
 
   return (
     <LeftMenuContainer>
@@ -33,37 +49,15 @@ export const LeftSidebar = () => {
             <Txt16Bold>홈</Txt16Bold>
           </LeftMenuItem>
           <DirectoryList>
-            <DirectoryContainer>
-              <DirectoryItem>
-                <CustomIcon src={Icon_Directory} />
-                <Txt16>딥러닝</Txt16>
-              </DirectoryItem>
-              <CustomIcon src={Icon_VerticalMore} />
-            </DirectoryContainer>
-            <DirectoryContainer>
-              <DirectoryItem>
-                <CustomIcon src={Icon_Directory} />
-                <Txt16>전공종합설계</Txt16>
-              </DirectoryItem>
-              <CustomIcon src={Icon_VerticalMore} />
-            </DirectoryContainer>
-            <DirectoryContainer>
-              <DirectoryItem>
-                <CustomIcon src={Icon_Directory} />
-                <Txt16>컴퓨터공학특강</Txt16>
-              </DirectoryItem>
-              <CustomIcon src={Icon_VerticalMore} />
-            </DirectoryContainer>
-            {/* {directoryList &&
-            directoryList.map((directory) => (
-              <DirectoryContainer key={note.id}>
+            {categories?.map((category, index) => (
+              <DirectoryContainer key={index}>
                 <DirectoryItem>
                   <CustomIcon src={Icon_Directory} />
-                  <Txt24Bold>{directory.title}</Txt24Bold>
+                  <Txt16>{category}</Txt16>
                 </DirectoryItem>
                 <CustomIcon src={Icon_VerticalMore} />
               </DirectoryContainer>
-            ))} */}
+            ))}
           </DirectoryList>
           <LeftMenuItem>
             <CustomIcon src={Icon_Trash} />

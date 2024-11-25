@@ -7,18 +7,25 @@ import {
   Txt16Bold,
   Txt18Bold,
 } from "../common";
+import { useQuery } from "@tanstack/react-query";
+import { getFolders } from "../utils";
 
 export const DirectorySelect = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // 기존의 전체 카테고리 목록
-  const categories = [
-    "딥러닝",
-    "전공종합설계",
-    "컴퓨터공학특강",
-    "AI",
-    "데이터 분석",
-  ];
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => await getFolders({}),
+    onSuccess: () => {
+      // console.log("success");
+      console.log(categories);
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+    refetchOnMount: "always",
+  });
+
 
   // 사용자가 input에서 선택하거나 새롭게 입력하는 이벤트 처리
   const handleCategoryChange = (e) => {
@@ -38,7 +45,7 @@ export const DirectorySelect = () => {
           placeholder="카테고리 선택 또는 새 카테고리 입력"
         />
         <datalist id="category-options">
-          {categories.map((category, index) => (
+          {categories?.map((category, index) => (
             <option key={index} value={category} />
           ))}
         </datalist>

@@ -35,10 +35,6 @@ function Home() {
     onCreate.mutate();
   };
 
-  useEffect(() => {
-    console.log("noteList", noteList);
-  }, [noteList]);
-
   return (
     <FlexContainer width="100vw" height="100vh">
       {/* Left 메뉴 컴포넌트로 분리 */}
@@ -55,17 +51,7 @@ function Home() {
         <Carousel />
 
         <NoteList noteList={noteList} />
-
-        {/* {noteList &&
-        noteList.map((note) => (
-          <div key={note.id}>
-            <Txt20>{note.title}</Txt20>
-            <Txt20>{dayjs(note.createdAt).toString()}</Txt20>
-          </div>
-        ))} */}
-        {/* <LoginCTA onClick={onClickCreate}>
-        <Txt24Bold>노트 생성하기</Txt24Bold>
-      </LoginCTA> */}
+        
       </FlexContainer>
     </FlexContainer>
   );
