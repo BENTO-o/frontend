@@ -409,7 +409,7 @@ export const NoteItemContainer = styled.div`
   margin-right: 3rem;
   border-bottom: 1px solid #eeeeee;
   &:last-child {
-    border-bottom: none;  // 마지막 항목은 경계선을 제거
+    border-bottom: none; // 마지막 항목은 경계선을 제거
   }
 `;
 
@@ -425,4 +425,233 @@ export const NoteInfo = styled.span`
   font-size: 14px;
   color: #666;
   text-align: center;
+`;
+
+// 노트 컨테이너 스타일
+export const NoteContainer = styled.div`
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+`;
+
+// 폼 그룹 스타일
+export const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+// 레이블 스타일
+export const Label = styled.label`
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+`;
+
+// 입력 스타일
+export const Input = styled.input`
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+// 파일 업로드 컨테이너 스타일
+export const FileUploadContainer = styled.div`
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  background-color: #f9f9f9;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
+// 메모 텍스트 에어리어 스타일
+export const MemoTextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  resize: none;
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+export const SubmitButton = styled.button`
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
+
+// 메모 리스트 컨테이너
+export const MemoListContainer = styled.div`
+  margin-top: 20px;
+`;
+
+// 개별 메모 아이템 스타일
+export const MemoItem = styled.div`
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+// 메모 타임스탬프 스타일
+export const MemoTimestamp = styled.span`
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+`;
+
+// 버튼 스타일
+export const AddButton = styled.button`
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
+
+// 분야 리스트 컨테이너 스타일
+export const FieldListContainer = styled.div`
+  margin-top: 20px;
+`;
+
+// 개별 분야 아이템 스타일
+export const FieldItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+`;
+
+// 삭제 버튼 스타일
+export const DeleteButton = styled.button`
+  padding: 5px 10px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #c0392b;
+  }
+`;
+
+// 선택 상자 스타일
+export const Select = styled.select`
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  width: calc(100% - 100px);
+  margin-right: 10px;
+`;
+
+// 녹음 컨테이너 스타일
+export const RecorderContainer = styled.div`
+  position: fixed;
+  bottom: 20px; /* 화면 아래에서 20px 위 */
+  right: 20px; /* 화면 오른쪽에서 20px 왼쪽 */
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 300px; /* 녹음 컨테이너의 너비 */
+  text-align: center;
+`;
+
+// 녹음 버튼 스타일
+export const RecordButton = styled.button`
+  padding: 10px 20px;
+  background-color: ${(props) => (props.isRecording ? "#e74c3c" : "#3498db")};
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+
+  &:hover {
+    background-color: ${(props) => (props.isRecording ? "#c0392b" : "#2980b9")};
+  }
+`;
+
+// 녹음된 파일 리스트 스타일
+export const RecordingList = styled.div`
+  margin-top: 20px;
+  text-align: left;
+`;
+
+// 개별 녹음 항목 스타일
+export const RecordingItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+`;
+
+// 녹음 버튼 스타일
+export const ControlButton = styled.button`
+  padding: 10px 15px;
+  background-color: ${(props) => props.color || '#3498db'};
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 5px;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;

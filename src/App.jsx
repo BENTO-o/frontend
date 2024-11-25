@@ -6,6 +6,8 @@ import Login from "./domains/login/Login";
 import Signup from "./domains/signup/Signup";
 import { useEffect, useState } from "react";
 import Home from "./domains/home/Home";
+import CreateNote from "./domains/createNote/CreateNote";
+import ReadNote from "./domains/readNote/ReadNote";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ function App() {
           <Route path="/" element={isLogin ? <Home /> : <Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/createNote" element={<CreateNote />} />
+          <Route path="/readNote" element={<ReadNote />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
