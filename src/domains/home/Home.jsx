@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlexContainer, PageLayout } from "../../common/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createNote, getNotes } from "./services";
@@ -35,6 +35,10 @@ function Home() {
     onCreate.mutate();
   };
 
+  useEffect(() => {
+    console.log("noteList", noteList);
+  }, [noteList]);
+
   return (
     <FlexContainer width="100vw" height="100vh">
       {/* Left 메뉴 컴포넌트로 분리 */}
@@ -50,7 +54,7 @@ function Home() {
 
         <Carousel />
 
-        <NoteList />
+        <NoteList noteList={noteList} />
 
         {/* {noteList &&
         noteList.map((note) => (

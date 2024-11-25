@@ -408,6 +408,7 @@ export const NoteItemContainer = styled.div`
   margin-left: 3rem;
   margin-right: 3rem;
   border-bottom: 1px solid #eeeeee;
+  cursor: pointer;
   &:last-child {
     border-bottom: none; // 마지막 항목은 경계선을 제거
   }
