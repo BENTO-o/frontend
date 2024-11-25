@@ -80,7 +80,7 @@ export const RecordBox = () => {
   return (
     <RecorderContainer>
       {!isRecording && (
-        <ControlButton onClick={handleStartRecording} color="#3498db">
+        <ControlButton onClick={handleStartRecording} color="#2563eb">
           녹음 시작
         </ControlButton>
       )}

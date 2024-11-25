@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { FormGroup, Input, Txt16Bold } from "../common";
+import {
+  FlexContainer,
+  FormGroup,
+  FormTitleContainer,
+  Input,
+  Txt16Bold,
+  Txt18Bold,
+} from "../common";
 
 export const DirectorySelect = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -20,27 +27,27 @@ export const DirectorySelect = () => {
 
   return (
     <FormGroup>
-      <Txt16Bold>카테고리 선택</Txt16Bold>
-      <div style={{ display: "flex", marginBottom: "20px" }}>
-        {/* Input 필드와 Datalist를 하나로 통합하여 사용자가 입력하거나 선택할 수 있는 필드 */}
+      <FormTitleContainer>
+        <Txt18Bold>카테고리 선택</Txt18Bold>
+      </FormTitleContainer>
+      <FlexContainer>
         <Input
           list="category-options"
           value={selectedCategory}
           onChange={handleCategoryChange}
           placeholder="카테고리 선택 또는 새 카테고리 입력"
-          style={{ marginRight: "10px" }}
         />
         <datalist id="category-options">
           {categories.map((category, index) => (
             <option key={index} value={category} />
           ))}
         </datalist>
-      </div>
-      {selectedCategory && (
-        <div>
-          <Txt16Bold>선택된 카테고리: {selectedCategory}</Txt16Bold>
-        </div>
-      )}
+        {selectedCategory && (
+          <div>
+            <Txt16Bold>선택된 카테고리: {selectedCategory}</Txt16Bold>
+          </div>
+        )}
+      </FlexContainer>
     </FormGroup>
   );
 };

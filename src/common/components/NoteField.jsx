@@ -4,9 +4,13 @@ import {
   DeleteButton,
   FieldItem,
   FieldListContainer,
+  FlexContainer,
   FormGroup,
+  FormTitleContainer,
   Input,
   Label,
+  Txt16Bold,
+  Txt18Bold,
 } from "../common";
 
 export const NoteField = () => {
@@ -27,18 +31,24 @@ export const NoteField = () => {
   };
   return (
     <FormGroup>
-      <Label>분야</Label>
-      <Input
-        type="text"
-        value={field}
-        onChange={(e) => setField(e.target.value)}
-        placeholder="분야 입력하기"
-      />
-      <AddButton onClick={handleAddField}>추가</AddButton>
+      <FormTitleContainer>
+        <Txt18Bold>분야</Txt18Bold>
+      </FormTitleContainer>
+      <FlexContainer>
+        <Input
+          type="text"
+          value={field}
+          onChange={(e) => setField(e.target.value)}
+          placeholder="분야 입력하기"
+        />
+
+        <AddButton onClick={handleAddField}>추가</AddButton>
+      </FlexContainer>
+
       <FieldListContainer>
         {fieldList.map((item, index) => (
           <FieldItem key={index}>
-            <span>{item}</span>
+            <Txt16Bold>{item}</Txt16Bold>
             <DeleteButton onClick={() => handleDeleteField(item)}>
               삭제
             </DeleteButton>

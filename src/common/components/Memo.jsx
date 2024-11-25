@@ -1,14 +1,19 @@
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import {
+  AddButton,
   DeleteButton,
+  FlexContainer,
   FormGroup,
+  FormTitleContainer,
   Label,
+  MemoContainer,
   MemoItem,
   MemoListContainer,
   MemoTextArea,
   MemoTimestamp,
-  SubmitButton,
+  Txt16Bold,
+  Txt18Bold,
 } from "../common";
 
 export const Memo = () => {
@@ -34,22 +39,28 @@ export const Memo = () => {
 
   return (
     <FormGroup>
-      <Label>메모</Label>
-      <MemoTextArea
-        value={memo}
-        onChange={(e) => setMemo(e.target.value)}
-        placeholder="메모를 작성해주세요..."
-      />
-      <SubmitButton onClick={handleAddMemo}>메모 추가</SubmitButton>
+      <FormTitleContainer>
+        <Txt18Bold>메모</Txt18Bold>
+      </FormTitleContainer>
+      <MemoContainer>
+        <MemoTextArea
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+          placeholder="메모를 작성해주세요..."
+        />
+        <AddButton onClick={handleAddMemo}>메모 추가</AddButton>
+      </MemoContainer>
 
       <MemoListContainer>
         {memoList.map((item, index) => (
           <MemoItem key={index}>
-            <p>{item.text}</p>
-            <MemoTimestamp>{item.timestamp}</MemoTimestamp>
-            <DeleteButton onClick={() => handleDeleteMemo(index)}>
-              삭제
-            </DeleteButton>
+            <Txt16Bold>{item.text}</Txt16Bold>
+            <FlexContainer justifyContent="space-between">
+              <MemoTimestamp>{item.timestamp}</MemoTimestamp>
+              <DeleteButton onClick={() => handleDeleteMemo(index)}>
+                삭제
+              </DeleteButton>
+            </FlexContainer>
           </MemoItem>
         ))}
       </MemoListContainer>

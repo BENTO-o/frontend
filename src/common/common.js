@@ -430,19 +430,18 @@ export const NoteInfo = styled.span`
 // 노트 컨테이너 스타일
 export const NoteContainer = styled.div`
   padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+  // background-color: #ffffff;
+  // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  // border-radius: 10px;
+  width: 80vw;
+  margin: 2rem auto;
 `;
 
 // 폼 그룹 스타일
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 // 레이블 스타일
@@ -456,26 +455,29 @@ export const Label = styled.label`
 // 입력 스타일
 export const Input = styled.input`
   padding: 10px;
+  min-width: 20rem;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
   color: #333;
-
+  margin-right: 10px;
   &::placeholder {
     color: #aaa;
   }
 `;
 
 // 파일 업로드 컨테이너 스타일
-export const FileUploadContainer = styled.div`
+export const FileUploadContainer = styled(FlexContainer)`
   border: 2px dashed #ccc;
   border-radius: 5px;
   padding: 20px;
   text-align: center;
+  justify-content: center;
   color: #888;
   background-color: #f9f9f9;
   cursor: pointer;
-
+  height: 20vh;
+  width: 80%;
   &:hover {
     background-color: #f0f0f0;
   }
@@ -483,24 +485,32 @@ export const FileUploadContainer = styled.div`
 
 // 메모 텍스트 에어리어 스타일
 export const MemoTextArea = styled.textarea`
-  width: 100%;
-  height: 150px;
-  padding: 10px;
+  width: 80%;
+  height: 20vh;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
   color: #333;
   resize: none;
+  margin-right: 10px;
 
   &::placeholder {
     color: #aaa;
   }
 `;
 
+export const MemoContainer = styled(FlexContainer)`
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+`;
+
 export const SubmitButton = styled.button`
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #3498db;
+  background-color: #2563eb;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -519,12 +529,15 @@ export const MemoListContainer = styled.div`
 
 // 개별 메모 아이템 스타일
 export const MemoItem = styled.div`
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  display: flex;
+  max-width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: #f9f9f9;
 `;
 
 // 메모 타임스탬프 스타일
@@ -538,7 +551,7 @@ export const MemoTimestamp = styled.span`
 // 버튼 스타일
 export const AddButton = styled.button`
   padding: 10px 20px;
-  background-color: #3498db;
+  background-color: #2563eb;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -553,17 +566,21 @@ export const AddButton = styled.button`
 // 분야 리스트 컨테이너 스타일
 export const FieldListContainer = styled.div`
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
 `;
 
 // 개별 분야 아이템 스타일
 export const FieldItem = styled.div`
   display: flex;
+  width: fit-content;
+  min-width: 10rem;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-right: 10px;
   background-color: #f9f9f9;
 `;
 
@@ -576,7 +593,7 @@ export const DeleteButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-
+  margin-left: 10px;
   &:hover {
     background-color: #c0392b;
   }
@@ -643,7 +660,7 @@ export const RecordingItem = styled.div`
 // 녹음 버튼 스타일
 export const ControlButton = styled.button`
   padding: 10px 15px;
-  background-color: ${(props) => props.color || '#3498db'};
+  background-color: ${(props) => props.color || "#3498db"};
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -654,4 +671,9 @@ export const ControlButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`;
+
+export const FormTitleContainer = styled(FlexContainer)`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 `;

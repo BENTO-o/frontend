@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { FileUploadContainer, FormGroup, Label } from "../../../common/common";
+import {
+  FileUploadContainer,
+  FormGroup,
+  FormTitleContainer,
+  Label,
+  Txt18Bold,
+} from "../../../common/common";
 
 export const RecordUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,30 +32,30 @@ export const RecordUpload = () => {
   };
   return (
     <FormGroup>
-        <Label>파일</Label>
-        <FileUploadContainer
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById("fileInput").click()}
-        >
-          {selectedFile ? (
-            <div>
-              <p>{selectedFile.name}</p>
-            </div>
-          ) : (
-            <>
-              <p>업로드할 파일 놓기</p>
-              <p>또는</p>
-              <p>파일 업로드</p>
-            </>
-          )}
-        </FileUploadContainer>
-        <input
-          id="fileInput"
-          type="file"
-          style={{ display: "none" }}
-          onChange={handleFileChange}
-        />
-      </FormGroup>
+      <FormTitleContainer>
+        <Txt18Bold>파일</Txt18Bold>
+      </FormTitleContainer>
+      <FileUploadContainer
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={() => document.getElementById("fileInput").click()}
+      >
+        {selectedFile ? (
+          <div>
+            <p>{selectedFile.name}</p>
+          </div>
+        ) : (
+          <div>
+            <p>업로드할 파일 놓기 또는 파일 업로드</p>
+          </div>
+        )}
+      </FileUploadContainer>
+      <input
+        id="fileInput"
+        type="file"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+    </FormGroup>
   );
 };
