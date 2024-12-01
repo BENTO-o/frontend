@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlexContainer, PageLayout } from "../../common/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createNote, getNotes } from "./services";
@@ -50,18 +50,8 @@ function Home() {
 
         <Carousel />
 
-        <NoteList />
-
-        {/* {noteList &&
-        noteList.map((note) => (
-          <div key={note.id}>
-            <Txt20>{note.title}</Txt20>
-            <Txt20>{dayjs(note.createdAt).toString()}</Txt20>
-          </div>
-        ))} */}
-        {/* <LoginCTA onClick={onClickCreate}>
-        <Txt24Bold>노트 생성하기</Txt24Bold>
-      </LoginCTA> */}
+        <NoteList noteList={noteList} />
+        
       </FlexContainer>
     </FlexContainer>
   );

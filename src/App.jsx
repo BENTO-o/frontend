@@ -6,14 +6,20 @@ import Login from "./domains/login/Login";
 import Signup from "./domains/signup/Signup";
 import { useEffect, useState } from "react";
 import Home from "./domains/home/Home";
+import CreateNote from "./domains/createNote/CreateNote";
+import ReadNote from "./domains/readNote/ReadNote";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [isLogin, setIsLogin] = useState(!!sessionStorage.getItem('token'));
+  const [isLogin, setIsLogin] = useState(!!sessionStorage.getItem("token"));
+
   useEffect(() => {
-    setIsLogin(!!sessionStorage.getItem('token'));
-  },[isLogin]);
+    setIsLogin(!!sessionStorage.getItem("token"));
+  }, [isLogin]);
+
+  const queryParams = new URLSearchParams(location.search);
+  const noteId = queryParams.get("noteId");
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -22,6 +28,8 @@ function App() {
           <Route path="/" element={isLogin ? <Home /> : <Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/createNote" element={<CreateNote />} />
+          <Route path="/notes/:noteId" element={<ReadNote noteId={noteId} />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

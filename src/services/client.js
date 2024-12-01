@@ -18,7 +18,7 @@ client.interceptors.request.use(
       const token = sessionStorage.getItem('token');
       // 헤더에 'token' 값을 설정합니다.
       if (token) {
-        config.headers['token'] = token;
+        config.headers['Authorization'] = 'Bearer' + ' ' + token;
       }
       return config;
     },
