@@ -5,6 +5,13 @@ export const getFolders = async () => {
   return response.data;
 };
 
+export const createFolder = async (folderName) => {
+  const response = await client.post("/notes/folders", {
+    folderName: folderName,
+  });
+  return response.data;
+};
+
 export const createMemo = async (noteId, timestamp, text) => {
   const response = await client.post("/memos", {
     noteId: noteId,
