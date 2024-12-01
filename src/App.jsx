@@ -20,7 +20,6 @@ function App() {
 
   const queryParams = new URLSearchParams(location.search);
   const noteId = queryParams.get("noteId");
-  const action = queryParams.get("action");
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -29,16 +28,7 @@ function App() {
           <Route path="/" element={isLogin ? <Home /> : <Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/createNote"
-            element={
-              action === "createFile" ? (
-                <CreateNote createFile={true} />
-              ) : (
-                <CreateNote createFile={false} />
-              )
-            }
-          />
+          <Route path="/createNote" element={<CreateNote />} />
           <Route path="/notes/:noteId" element={<ReadNote noteId={noteId} />} />
         </Routes>
       </BrowserRouter>
