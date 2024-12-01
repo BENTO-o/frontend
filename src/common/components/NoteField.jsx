@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddButton,
   DeleteButton,
@@ -12,15 +12,17 @@ import {
   Txt16Bold,
   Txt18Bold,
 } from "../common";
+import { useCreateNoteFormStore } from "../../stores/useCreateNoteForm";
 
 export const NoteField = () => {
+  const { form, setFormField, resetForm } = useCreateNoteFormStore(); // zustand 훅 사용하여 form 상태 가져오기
+
   const [field, setField] = useState("");
   const [fieldList, setFieldList] = useState([]);
 
   // 분야 추가 이벤트 핸들러
   const handleAddField = () => {
     if (field.trim() === "" || fieldList.includes(field)) return; // 빈 입력 또는 중복 추가 방지
-
     setFieldList([...fieldList, field]); // 기존 분야 리스트에 추가
     setField(""); // 입력 필드 초기화
   };
@@ -29,6 +31,11 @@ export const NoteField = () => {
   const handleDeleteField = (fieldToDelete) => {
     setFieldList(fieldList.filter((f) => f !== fieldToDelete)); // 삭제하려는 분야만 제외하고 리스트 업데이트
   };
+
+  useEffect(() => {
+    setFormField("topic", fieldList); // form 상태 업데이트
+  }, [fieldList]);
+
   return (
     <FormGroup>
       <FormTitleContainer>
