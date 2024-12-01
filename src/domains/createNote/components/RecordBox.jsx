@@ -1,18 +1,43 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  AudioVisualizer,
   ControlButton,
+  ControlButtonsContainer,
+  CustomIcon,
   RecordButton,
   RecorderContainer,
+  RecorderControlButton,
   RecordingItem,
   RecordingList,
+  TimeDisplay,
 } from "../../../common/common";
+import Icon_Bookmark from "../../../assets/Bookmark.svg";
+import ColorIcon_Bookmark from "../../../assets/Bookmark_yellow.svg";
+import Icon_Mic from "../../../assets/Mic_black.svg";
+import Icon_Pause from "../../../assets/PlayerPause.svg";
+import Icon_Stop from "../../../assets/PlayerStop.svg";
+import Icon_SoundWave from "../../../assets/SoundWave.svg";
+import Icon_Player from "../../../assets/PlayerPlay.svg";
+import { useCreateNoteFormStore } from "../../../stores/useCreateNoteForm";
 
 export const RecordBox = () => {
+  const { form, setFormField, resetForm } = useCreateNoteFormStore(); // zustand 훅 사용하여 form 상태 가져오기
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [audioUrl, setAudioUrl] = useState(null);
+  const [audioFile, setAudioFile] = useState(null);
+  const [time, setTime] = useState("00:00");
+  const [seconds, setSeconds] = useState(0);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    let minutes = Math.floor(seconds / 60);
+    let secs = seconds % 60;
+    setTime(
+      `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
+    );
+  }, [seconds]);
 
   // 녹음 시작 핸들러
   const handleStartRecording = () => {
@@ -33,13 +58,20 @@ export const RecordBox = () => {
             type: "audio/wav",
           });
           audioChunksRef.current = [];
-          const audioUrl = URL.createObjectURL(audioBlob);
-          setAudioUrl(audioUrl);
+
+          setAudioFile(new File([audioBlob], "recording.wav", {
+            type: "audio/wav",
+            lastModified: Date.now(),
+          }))
+          console.log("Audio File:", audioFile);
         };
 
         mediaRecorder.start();
         setIsRecording(true);
         setIsPaused(false);
+        timerRef.current = setInterval(() => {
+          setSeconds((prev) => prev + 1);
+        }, 1000);
       })
       .catch((error) => {
         console.error("Error accessing microphone", error);
@@ -54,6 +86,7 @@ export const RecordBox = () => {
     ) {
       mediaRecorderRef.current.pause();
       setIsPaused(true);
+      clearInterval(timerRef.current);
     }
   };
 
@@ -65,6 +98,9 @@ export const RecordBox = () => {
     ) {
       mediaRecorderRef.current.resume();
       setIsPaused(false);
+      timerRef.current = setInterval(() => {
+        setSeconds((prev) => prev + 1);
+      }, 1000);
     }
   };
 
@@ -74,39 +110,53 @@ export const RecordBox = () => {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
       setIsPaused(false);
+      clearInterval(timerRef.current);
     }
   };
 
+  useEffect(() => {
+    if (!isRecording) {
+      setSeconds(0);
+    }
+  }, [isRecording]);
+
+  useEffect(() => {
+    setFormField("file", audioFile);
+  }, [audioFile]);
+
   return (
     <RecorderContainer>
-      {!isRecording && (
-        <ControlButton onClick={handleStartRecording} color="#2563eb">
-          녹음 시작
-        </ControlButton>
-      )}
-
-      {isRecording && (
-        <>
-          {!isPaused ? (
-            <ControlButton onClick={handlePauseRecording} color="#e67e22">
-              일시 정지
-            </ControlButton>
-          ) : (
-            <ControlButton onClick={handleResumeRecording} color="#2ecc71">
-              녹음 재개
-            </ControlButton>
-          )}
-          <ControlButton onClick={handleStopRecording} color="#e74c3c">
-            녹음 정지
-          </ControlButton>
-        </>
-      )}
-
-      {audioUrl && (
-        <div style={{ marginTop: "20px" }}>
-          <audio controls src={audioUrl} />
-        </div>
-      )}
+      <CustomIcon src={Icon_Mic} />
+      <TimeDisplay>{time}</TimeDisplay>
+      {isRecording && (<CustomIcon src={Icon_SoundWave} />)}
+      <ControlButtonsContainer>
+        {isRecording && !isPaused && (
+          <RecorderControlButton
+            src={Icon_Pause}
+            alt="Pause Icon"
+            onClick={handlePauseRecording}
+          />
+        )}
+        {(!isRecording || isPaused) && (
+          <RecorderControlButton
+            src={Icon_Player}
+            alt="Resume Icon"
+            onClick={
+              !isRecording ? handleStartRecording : handleResumeRecording
+            }
+          />
+        )}
+        {isRecording && (
+          <RecorderControlButton
+            src={Icon_Stop}
+            alt="Stop Icon"
+            onClick={handleStopRecording}
+          />
+        )}
+        {(isRecording || isPaused) && (
+          <RecorderControlButton src={Icon_Bookmark} alt="Bookmark Icon" />
+        )}
+      </ControlButtonsContainer>
     </RecorderContainer>
   );
 };
