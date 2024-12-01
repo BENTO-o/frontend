@@ -160,7 +160,7 @@ export const TopMenuItem = styled.div`
 `;
 
 export const LeftMenuItem = styled(FlexContainer)`
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
   cursor: pointer;
 `;
@@ -609,13 +609,28 @@ export const DeleteButton = styled.button`
 
 // 선택 상자 스타일
 export const Select = styled.select`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  font-size: 16px;
+  min-width: 100%;
+  color: inherit;
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+export const SelectWrapper = styled.div`
   padding: 10px;
+  min-width: 20rem;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
   color: #333;
-  width: calc(100% - 100px);
   margin-right: 10px;
+  display: inline-block;
 `;
 
 // 녹음 컨테이너 스타일
@@ -629,6 +644,12 @@ export const RecorderContainer = styled.div`
   border-radius: 10px;
   width: 300px; /* 녹음 컨테이너의 너비 */
   text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: #60a5fa;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
 `;
 
 // 녹음 버튼 스타일
@@ -645,6 +666,33 @@ export const RecordButton = styled.button`
   &:hover {
     background-color: ${(props) => (props.isRecording ? "#c0392b" : "#2980b9")};
   }
+`;
+
+export const TimeDisplay = styled.span`
+  font-size: 16px;
+  color: #404040;
+  margin-right: 10px;
+`;
+
+export const AudioVisualizer = styled.div`
+  width: 40px;
+  height: 10px;
+  background-color: #404040;
+  margin-right: 20px;
+`;
+
+export const ControlButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  background-color: #eff6ff;
+  border-radius: 10px;
+  padding: 5px;
+`;
+
+export const RecorderControlButton = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 `;
 
 // 녹음된 파일 리스트 스타일
