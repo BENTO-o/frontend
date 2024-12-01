@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FileUploadContainer,
   FormGroup,
@@ -6,15 +6,17 @@ import {
   Label,
   Txt18Bold,
 } from "../../../common/common";
+import { useCreateNoteFormStore } from "../../../stores/useCreateNoteForm";
 
 export const RecordUpload = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+
+  const { form, setFormField, resetForm } = useCreateNoteFormStore(); // zustand 훅 사용하여 form 상태 가져오기
 
   // 파일 선택 이벤트 핸들러
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedFile(file);
+      setFormField("file", file);
     }
   };
 
@@ -27,9 +29,10 @@ export const RecordUpload = () => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file) {
-      setSelectedFile(file);
+      setFormField("file", file);
     }
   };
+
   return (
     <FormGroup>
       <FormTitleContainer>
@@ -40,9 +43,9 @@ export const RecordUpload = () => {
         onDrop={handleDrop}
         onClick={() => document.getElementById("fileInput").click()}
       >
-        {selectedFile ? (
+        {form?.file ? (
           <div>
-            <p>{selectedFile.name}</p>
+            <p>{form?.file.name}</p>
           </div>
         ) : (
           <div>
