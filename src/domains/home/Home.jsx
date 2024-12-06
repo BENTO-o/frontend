@@ -9,31 +9,20 @@ import { Carousel } from "../../common/components/Carousel";
 import { NoteList } from "./components/NoteList";
 
 function Home() {
-  const { data: noteList } = useQuery({
-    queryKey: ["noteList"],
-    queryFn: async () => await getNotes({}),
-    onSuccess: () => {
-      console.log("success");
-    },
-    onError: (e) => {
-      console.error(e);
-    },
-    refetchOnMount: "always",
-  });
 
-  const onCreate = useMutation({
-    mutationFn: createNote,
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
-    },
-  });
+  // const onCreate = useMutation({
+  //   mutationFn: createNote,
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //   },
+  //   onError: (error) => {
+  //     console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
+  //   },
+  // });
 
-  const onClickCreate = async () => {
-    onCreate.mutate();
-  };
+  // const onClickCreate = async () => {
+  //   onCreate.mutate();
+  // };
 
   return (
     <FlexContainer width="100vw" height="100vh">
@@ -50,7 +39,7 @@ function Home() {
 
         <Carousel />
 
-        <NoteList noteList={noteList} />
+        <NoteList/>
         
       </FlexContainer>
     </FlexContainer>

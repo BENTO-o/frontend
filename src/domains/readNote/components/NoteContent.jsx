@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Memo } from "../../../common/components/Memo";
 import {
   AISummaryContainer,
@@ -7,6 +7,7 @@ import {
   CustomIcon,
   DateTime,
   DetailMemoContainer,
+  DividerWithIcon,
   FieldLabel,
   FlexContainer,
   FormTitleContainer,
@@ -24,6 +25,8 @@ import {
   Txt24Bold,
   VerticalLineEEE,
 } from "../../../common/common";
+import Icon_Bookmark from "../../../assets/Bookmark.svg";
+import Icon_Trash from "../../../assets/Trash.svg";
 import dayjs from "dayjs";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAISummary } from "../services";
@@ -43,6 +46,14 @@ const NoteContent = (props) => {
     },
     refetchOnMount: "always",
   });
+
+  useEffect(() => {
+    console.log("noteData", props.noteData);
+  }, [props.noteData]);
+
+  // useEffect(() => {
+  //   console.log("summary", summary);
+  // }, [summary]);
 
   return (
     <FlexContainer
@@ -73,7 +84,7 @@ const NoteContent = (props) => {
           </FormTitleContainer>
         </FlexContainer>
         <FormTitleContainer>
-          <CustomIcon />
+          <CustomIcon src={Icon_Trash} />
         </FormTitleContainer>
       </FlexContainer>
 
@@ -85,11 +96,42 @@ const NoteContent = (props) => {
           padding="10px"
         >
           <Txt20Bold>음성 기록</Txt20Bold>
-          {props.noteData?.content?.script?.map((item, index) => (
+          {/* {props.noteData?.content?.script?.map((item, index) => (
             <RecordItem key={index}>
               <RecordIcon />
               <RecordText>{item.text}</RecordText>
+              <RecordText>{item.timestamp}</RecordText>
             </RecordItem>
+          ))} */}
+          {props.noteData?.content?.script?.map((item, index) => (
+            <React.Fragment key={index}>
+              <FlexContainer
+                width="100%"
+                alignItems="center"
+                flexDirection="row"
+                padding="10px"
+                margin="10px 0"
+                border="1px solid #EEE"
+                borderRadius="8px"
+              >
+                <RecordIcon />
+                <FlexContainer
+                  flexDirection="column"
+                  alignItems="flex-start"
+                  margin="0 10px"
+                >
+                  <RecordText>{item.text}</RecordText>
+                  {/* <RecordText>{item.timestamp}</RecordText> */}
+                </FlexContainer>
+              </FlexContainer>
+              {index !== props.noteData?.content?.script?.length - 1 && (
+                <DividerWithIcon>
+                  <LineEEE />
+                  <CustomIcon src={Icon_Bookmark} />
+                  <LineEEE />
+                </DividerWithIcon>
+              )}
+            </React.Fragment>
           ))}
         </FlexContainer>
         <VerticalLineEEE />
@@ -104,14 +146,19 @@ const NoteContent = (props) => {
             <Memo />
           </DetailMemoContainer>
           <LineEEE />
-          <FlexContainer
-            flexDirection="column"
-            alignItems="flex-start"
-            padding="10px"
-          >
-            <AISummaryTitle>AI 요약</AISummaryTitle>
-            <AISummaryText>{summary?.summary}</AISummaryText>
-          </FlexContainer>
+
+          {summary ? (
+            <FlexContainer
+              flexDirection="column"
+              alignItems="flex-start"
+              padding="10px"
+            >
+              <AISummaryTitle>AI 요약</AISummaryTitle>
+              <AISummaryText>{summary?.summary}</AISummaryText>
+            </FlexContainer>
+          ) : (
+            <>AI 요약이 없습니다.</>
+          )}
         </FlexContainer>
       </FlexContainer>
     </FlexContainer>
