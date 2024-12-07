@@ -26,10 +26,11 @@ import {
   VerticalLineEEE,
 } from "../../../common/common";
 import Icon_Bookmark from "../../../assets/Bookmark.svg";
+import Icon_Bookmark_Yellow from "../../../assets/Bookmark_yellow.svg";
 import Icon_Trash from "../../../assets/Trash.svg";
 import dayjs from "dayjs";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAISummary } from "../services";
+import { createBookmark, getAISummary } from "../services";
 import { createMemo, getMemos } from "../../../common/utils";
 
 // JSX 컴포넌트
@@ -46,6 +47,23 @@ const NoteContent = (props) => {
     },
     refetchOnMount: "always",
   });
+
+  const onCreateBookmark = useMutation({
+    mutationFn: createBookmark,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
+    },
+  });
+
+  const onClickCreteBookmrk = async (timestamp) => {
+    onCreateBookmark.mutate({
+      noteId: props.noteData?.noteId,
+      timestamp: timestamp,
+    });
+  };
 
   useEffect(() => {
     console.log("noteData", props.noteData);
@@ -96,13 +114,6 @@ const NoteContent = (props) => {
           padding="10px"
         >
           <Txt20Bold>음성 기록</Txt20Bold>
-          {/* {props.noteData?.content?.script?.map((item, index) => (
-            <RecordItem key={index}>
-              <RecordIcon />
-              <RecordText>{item.text}</RecordText>
-              <RecordText>{item.timestamp}</RecordText>
-            </RecordItem>
-          ))} */}
           {props.noteData?.content?.script?.map((item, index) => (
             <React.Fragment key={index}>
               <FlexContainer
@@ -113,6 +124,7 @@ const NoteContent = (props) => {
                 margin="10px 0"
                 border="1px solid #EEE"
                 borderRadius="8px"
+                justifyContent="flex-start"
               >
                 <RecordIcon />
                 <FlexContainer
@@ -124,13 +136,22 @@ const NoteContent = (props) => {
                   {/* <RecordText>{item.timestamp}</RecordText> */}
                 </FlexContainer>
               </FlexContainer>
-              {index !== props.noteData?.content?.script?.length - 1 && (
-                <DividerWithIcon>
-                  <LineEEE />
-                  <CustomIcon src={Icon_Bookmark} />
-                  <LineEEE />
-                </DividerWithIcon>
-              )}
+              {/* {index !== props.noteData?.content?.script?.length - 1 && ()} */}
+              <DividerWithIcon>
+                <LineEEE />
+                {item.bookmark ? (
+                  <CustomIcon
+                    src={Icon_Bookmark_Yellow}
+                    onClick={()=>{}}
+                  />
+                ) : (
+                  <CustomIcon
+                    src={Icon_Bookmark}
+                    onClick={() => onClickCreteBookmrk(item.timestamp)}
+                  />
+                )}
+                <LineEEE />
+              </DividerWithIcon>
             </React.Fragment>
           ))}
         </FlexContainer>
@@ -143,7 +164,7 @@ const NoteContent = (props) => {
           height="75vh"
         >
           <DetailMemoContainer>
-            <Memo />
+            <Memo noteId={props.noteData?.noteId} memos={props.noteData?.memos} />
           </DetailMemoContainer>
           <LineEEE />
 
