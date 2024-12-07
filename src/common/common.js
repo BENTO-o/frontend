@@ -818,3 +818,14 @@ export const AISummaryText = styled.p`
   font-size: 14px;
   line-height: 1.4;
 `;
+
+export const DividerWithIcon = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+
+  & > *:not(:last-child) {
+    flex-grow: 1;
+  }
+`;

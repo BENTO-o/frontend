@@ -19,3 +19,8 @@ export const createNote = async () => {
   const response = await client.post("/notes", {});
   return response.data;
 };
+
+export const createBookmark = async (bookmarkForm) => {
+  const response = await client.post(`/bookmarks`, bookmarkForm);
+  return response.data;
+};

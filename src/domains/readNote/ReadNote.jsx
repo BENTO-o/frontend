@@ -17,6 +17,7 @@ function ReadNote() {
     queryFn: async () => await getNote(noteId),
     onSuccess: () => {
       console.log("success");
+      console.log(noteData);
     },
     onError: (e) => {
       console.error(e);
