@@ -24,13 +24,22 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={isLogin ? <Home /> : <Landing />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/createNote" element={<CreateNote />} />
-          <Route path="/notes/:noteId" element={<ReadNote noteId={noteId} />} />
-        </Routes>
+        {!isLogin ? (
+          <Routes>
+            <Route path="/" element={isLogin ? <Home /> : <Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/createNote" element={<CreateNote />} />
+            <Route
+              path="/notes/:noteId"
+              element={<ReadNote noteId={noteId} />}
+            />
+          </Routes>
+        )}
       </BrowserRouter>
     </QueryClientProvider>
   );
