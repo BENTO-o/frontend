@@ -20,11 +20,12 @@ import Icon_Directory from "../../assets/Directory.svg";
 import Icon_VerticalMore from "../../assets/VerticalMore.svg";
 import Icon_Trash from "../../assets/Trash.svg";
 import "react-datepicker/dist/react-datepicker.css";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFolder, getFolders } from "../utils";
 import { useNavigate } from "react-router-dom";
 
 export const LeftSidebar = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const handleNavigateToHome = () => {
@@ -52,6 +53,7 @@ export const LeftSidebar = () => {
     mutationFn: createFolder,
     onSuccess: (data) => {
       console.log(data);
+      queryClient.invalidateQueries(["folders"]);
     },
     onError: (error) => {
       console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
@@ -59,7 +61,7 @@ export const LeftSidebar = () => {
   });
 
   const onClickCreateFolder = async () => {
-    onCreateFolder.mutate("고구마깡은 감자도리");
+    onCreateFolder.mutate("고구마깡은 감자도리리");
   };
 
   return (
@@ -73,7 +75,7 @@ export const LeftSidebar = () => {
               <CustomIcon src={Icon_Home} />
               <Txt16Bold>홈</Txt16Bold>
             </FlexContainer>
-            {/* <AddButton onClick={onClickCreateFolder}>+</AddButton> */}
+            <AddButton onClick={onClickCreateFolder}>+</AddButton>
           </LeftMenuItem>
           <DirectoryList>
             {folders?.map((folder, index) => (
