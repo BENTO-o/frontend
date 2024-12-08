@@ -495,7 +495,7 @@ export const Input = styled.input`
 // 입력 스타일
 export const LeftSideInput = styled.input`
   padding: 10px;
-  min-width: 5rem;
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
