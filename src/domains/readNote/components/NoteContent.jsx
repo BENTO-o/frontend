@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Memo } from "../../../common/components/Memo";
 import {
   AISummaryContainer,
@@ -29,12 +29,23 @@ import Icon_Bookmark from "../../../assets/Bookmark.svg";
 import Icon_Bookmark_Yellow from "../../../assets/Bookmark_yellow.svg";
 import Icon_Trash from "../../../assets/Trash.svg";
 import dayjs from "dayjs";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createBookmark, getAISummary } from "../services";
 import { createMemo, getMemos } from "../../../common/utils";
+import { useMemos } from "../../../stores/useMemos";
 
 // JSX 컴포넌트
 const NoteContent = (props) => {
+  const queryClient = useQueryClient();
+
+  const [selectedTimestamp, setSelectedTimestamp] = useState("");
+  const { memos, setMemos } = useMemos(); // zustand 훅 사용하여 form 상태 가져오기
+  
+
+  const onChangeTimestamp = (timestamp) => {
+    setSelectedTimestamp(timestamp);
+  };
+
   const { data: summary } = useQuery({
     queryKey: ["summary"],
     queryFn: async () => await getAISummary(props?.noteData?.noteId),
@@ -52,6 +63,7 @@ const NoteContent = (props) => {
     mutationFn: createBookmark,
     onSuccess: (data) => {
       console.log(data);
+      queryClient.invalidateQueries(["noteData"]);
     },
     onError: (error) => {
       console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
@@ -66,7 +78,8 @@ const NoteContent = (props) => {
   };
 
   useEffect(() => {
-    console.log("noteData", props.noteData);
+    // console.log("noteData", props.noteData);
+    setMemos(props.noteData?.memos);
   }, [props.noteData]);
 
   // useEffect(() => {
@@ -76,7 +89,7 @@ const NoteContent = (props) => {
   return (
     <FlexContainer
       width="90%"
-      height="100%"
+      height="85vh"
       flexDirection="column"
       margin="2rem"
     >
@@ -125,6 +138,7 @@ const NoteContent = (props) => {
                 border="1px solid #EEE"
                 borderRadius="8px"
                 justifyContent="flex-start"
+                onClick={() => onChangeTimestamp(item.timestamp)}
               >
                 <RecordIcon />
                 <FlexContainer
@@ -133,17 +147,14 @@ const NoteContent = (props) => {
                   margin="0 10px"
                 >
                   <RecordText>{item.text}</RecordText>
-                  {/* <RecordText>{item.timestamp}</RecordText> */}
                 </FlexContainer>
               </FlexContainer>
               {/* {index !== props.noteData?.content?.script?.length - 1 && ()} */}
-              <DividerWithIcon>
+              {selectedTimestamp === item.timestamp && (
+                <DividerWithIcon>
                 <LineEEE />
                 {item.bookmark ? (
-                  <CustomIcon
-                    src={Icon_Bookmark_Yellow}
-                    onClick={()=>{}}
-                  />
+                  <CustomIcon src={Icon_Bookmark_Yellow} onClick={() => {}} />
                 ) : (
                   <CustomIcon
                     src={Icon_Bookmark}
@@ -151,7 +162,7 @@ const NoteContent = (props) => {
                   />
                 )}
                 <LineEEE />
-              </DividerWithIcon>
+              </DividerWithIcon>)}
             </React.Fragment>
           ))}
         </FlexContainer>
@@ -164,7 +175,11 @@ const NoteContent = (props) => {
           height="75vh"
         >
           <DetailMemoContainer>
-            <Memo noteId={props.noteData?.noteId} memos={props.noteData?.memos} />
+            <Memo
+              noteId={props.noteData?.noteId}
+              memos={props.noteData?.memos}
+              timestamp={selectedTimestamp}
+            />
           </DetailMemoContainer>
           <LineEEE />
 
