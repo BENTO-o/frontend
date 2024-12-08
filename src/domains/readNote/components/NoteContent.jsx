@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Memo } from "../../../common/components/Memo";
+import Icon_DefaultImg from "../../../assets/DefaultImg.svg";
 import {
   AISummaryContainer,
   AISummaryText,
@@ -40,10 +41,11 @@ const NoteContent = (props) => {
 
   const [selectedTimestamp, setSelectedTimestamp] = useState("");
   const { memos, setMemos } = useMemos(); // zustand 훅 사용하여 form 상태 가져오기
-  
 
   const onChangeTimestamp = (timestamp) => {
-    setSelectedTimestamp(timestamp);
+    timestamp === selectedTimestamp
+      ? setSelectedTimestamp("")
+      : setSelectedTimestamp(timestamp);
   };
 
   const { data: summary } = useQuery({
@@ -81,10 +83,6 @@ const NoteContent = (props) => {
     // console.log("noteData", props.noteData);
     setMemos(props.noteData?.memos);
   }, [props.noteData]);
-
-  // useEffect(() => {
-  //   console.log("summary", summary);
-  // }, [summary]);
 
   return (
     <FlexContainer
@@ -140,7 +138,8 @@ const NoteContent = (props) => {
                 justifyContent="flex-start"
                 onClick={() => onChangeTimestamp(item.timestamp)}
               >
-                <RecordIcon />
+                <RecordIcon src={Icon_DefaultImg} />
+
                 <FlexContainer
                   flexDirection="column"
                   alignItems="flex-start"
@@ -152,17 +151,18 @@ const NoteContent = (props) => {
               {/* {index !== props.noteData?.content?.script?.length - 1 && ()} */}
               {selectedTimestamp === item.timestamp && (
                 <DividerWithIcon>
-                <LineEEE />
-                {item.bookmark ? (
-                  <CustomIcon src={Icon_Bookmark_Yellow} onClick={() => {}} />
-                ) : (
-                  <CustomIcon
-                    src={Icon_Bookmark}
-                    onClick={() => onClickCreteBookmrk(item.timestamp)}
-                  />
-                )}
-                <LineEEE />
-              </DividerWithIcon>)}
+                  <LineEEE />
+                  {item.bookmark ? (
+                    <CustomIcon src={Icon_Bookmark_Yellow} onClick={() => {}} />
+                  ) : (
+                    <CustomIcon
+                      src={Icon_Bookmark}
+                      onClick={() => onClickCreteBookmrk(item.timestamp)}
+                    />
+                  )}
+                  <LineEEE />
+                </DividerWithIcon>
+              )}
             </React.Fragment>
           ))}
         </FlexContainer>
