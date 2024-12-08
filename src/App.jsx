@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Home from "./domains/home/Home";
 import CreateNote from "./domains/createNote/CreateNote";
 import ReadNote from "./domains/readNote/ReadNote";
+import Setting from "./domains/setting/Setting";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ function App() {
               path="/notes/:noteId"
               element={<ReadNote noteId={noteId} />}
             />
+            <Route path="/setting" element={<Setting />} />
           </Routes>
         )}
       </BrowserRouter>
