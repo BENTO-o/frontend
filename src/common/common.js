@@ -353,6 +353,23 @@ export const LoginBtn = styled.button`
 `;
 
 export const SignupBtn = styled(LoginBtn)`
+padding: 10px 20px;
+  background-color: #f7f7f7;
+  color: #404040;
+`;
+
+export const SaveBtn = styled.button`
+padding: 10px 20px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+`;
+
+export const RollbackBtn = styled(SaveBtn)`
   background-color: #f7f7f7;
   color: #404040;
 `;
@@ -450,6 +467,7 @@ export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  width: ${(props) => props.width || ""};
 `;
 
 // 레이블 스타일
@@ -828,4 +846,73 @@ export const DividerWithIcon = styled.div`
   & > *:not(:last-child) {
     flex-grow: 1;
   }
+`;
+
+export const RadioButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  input {
+    margin-right: 5px;
+  }
+
+  label {
+    font-size: 14px;
+    color: #333;
+  }
+`;
+
+// TagContainer 컴포넌트
+export const TagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+export const TagWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #333;
+  gap: 5px;
+  margin-bottom: 10px;
+
+`;
+
+export const RemoveButton = styled.button`
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 12px;
+
+  &:hover {
+    color: #c0392b;
+  }
+`;
+
+export const ProgressBarWrapper = styled.div`
+  min-width: 20rem;
+  height: 38px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding-right: 20px;
+  border: 1px solid #ddd;
+`;
+
+export const ProgressBarFill = styled.div`
+  width: ${(props) => props.percentage}%;
+  height: 100%;
+  background-color: #2563eb;
+  transition: width 0.3s ease-in-out;
 `;
