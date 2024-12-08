@@ -120,7 +120,7 @@ export const LeftSidebar = () => {
           />
           <LeftMenuItem onClick={handleNavigateToSetting}>
             <CustomIcon src={Icon_DefaultImg} />
-            <Txt16Bold>고구마</Txt16Bold>
+            <Txt16Bold>고구마123</Txt16Bold>
           </LeftMenuItem>
         </InnerLeftMenu>
       </LeftMenu>

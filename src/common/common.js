@@ -804,7 +804,7 @@ export const RecordItem = styled.div`
   margin-bottom: 15px;
 `;
 
-export const RecordIcon = styled.div`
+export const RecordIcon = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;

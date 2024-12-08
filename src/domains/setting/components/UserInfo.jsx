@@ -75,7 +75,7 @@ export const UserInfo = () => {
           <FormTitleContainer>
             <Txt16Bold>이메일</Txt16Bold>
           </FormTitleContainer>
-          <Input value="rkawk@naver.com" />
+          <Input value="rhrnak123@naver.com" />
           <FormTitleContainer>
             <Txt16Bold>연락처</Txt16Bold>
           </FormTitleContainer>
@@ -83,8 +83,7 @@ export const UserInfo = () => {
           <FormTitleContainer>
             <Txt16Bold>이름</Txt16Bold>
           </FormTitleContainer>
-
-          <Input value="감자" />
+          <Input value="고구마123" />
           <div style={{ height: "10px" }} />
         </FlexContainer>
       </FlexContainer>
