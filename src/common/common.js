@@ -492,6 +492,20 @@ export const Input = styled.input`
   }
 `;
 
+// 입력 스타일
+export const LeftSideInput = styled.input`
+  padding: 10px;
+  min-width: 5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
 // 파일 업로드 컨테이너 스타일
 export const FileUploadContainer = styled(FlexContainer)`
   border: 2px dashed #ccc;

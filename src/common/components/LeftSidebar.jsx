@@ -13,6 +13,7 @@ import {
   LeftMenu,
   AddButton,
   FlexContainer,
+  LeftSideInput,
 } from "../common";
 import DatePicker from "react-datepicker";
 import Icon_Home from "../../assets/Home.svg";
@@ -28,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 export const LeftSidebar = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [folderName, setFolderName] = useState("");
 
   const handleNavigateToHome = () => {
     navigate(`/`);
@@ -35,6 +37,10 @@ export const LeftSidebar = () => {
 
   const handleNavigateToSetting = () => {
     navigate(`/setting`);
+  };
+
+  const handleFolderInputChange = (e) => {
+    setFolderName(e.target.value);
   };
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -65,7 +71,7 @@ export const LeftSidebar = () => {
   });
 
   const onClickCreateFolder = async () => {
-    onCreateFolder.mutate("전공종합설계");
+    onCreateFolder.mutate(folderName);
   };
 
   return (
@@ -79,6 +85,10 @@ export const LeftSidebar = () => {
               <CustomIcon src={Icon_Home} />
               <Txt16Bold>홈</Txt16Bold>
             </FlexContainer>
+          </LeftMenuItem>
+          <div style={{ height: "10px"}} />
+          <LeftMenuItem>
+            <LeftSideInput placeholder="폴더명을 입력하세요" value={folderName} onChange={handleFolderInputChange} />
             <AddButton onClick={onClickCreateFolder}>+</AddButton>
           </LeftMenuItem>
           <DirectoryList>
