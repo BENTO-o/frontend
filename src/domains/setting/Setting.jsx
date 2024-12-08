@@ -26,22 +26,22 @@ import TopBar from "../../common/components/TopBar";
 
 export const Setting = () => {
   return (
-    <FlexContainer width="100%" height="100%">
+    <FlexContainer width="100vw" height="100vh">
       {/* Left 메뉴 컴포넌트로 분리 */}
       <LeftSidebar />
 
       <FlexContainer
         flexDirection="column"
         width="100%"
-        height="100%"
-        justifyContent="flex-start"
+        height="100vh"
+        margin="2rem"
       >
         <TopBar />
 
         <FlexContainer
           justifyContent="space-between"
           width="80%"
-          height="100%"
+          height="90%"
           margin="50px 0 0 0"
         >
           <Txt24Bold>서비스 설정</Txt24Bold>

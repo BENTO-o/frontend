@@ -19,6 +19,7 @@ import Icon_Home from "../../assets/Home.svg";
 import Icon_Directory from "../../assets/Directory.svg";
 import Icon_VerticalMore from "../../assets/VerticalMore.svg";
 import Icon_Trash from "../../assets/Trash.svg";
+import Icon_DefaultImg from "../../assets/DefaultImg.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFolder, getFolders } from "../utils";
@@ -32,6 +33,9 @@ export const LeftSidebar = () => {
     navigate(`/`);
   };
 
+  const handleNavigateToSetting = () => {
+    navigate(`/setting`);
+  };
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -61,7 +65,7 @@ export const LeftSidebar = () => {
   });
 
   const onClickCreateFolder = async () => {
-    onCreateFolder.mutate("고구마깡은 감자도리리");
+    onCreateFolder.mutate("전공종합설계");
   };
 
   return (
@@ -104,9 +108,9 @@ export const LeftSidebar = () => {
             isClearable
             dateFormat="yyyy/MM/dd"
           />
-          <LeftMenuItem>
-            <CustomIcon src={""} />
-            <Txt16Bold>유저네임</Txt16Bold>
+          <LeftMenuItem onClick={handleNavigateToSetting}>
+            <CustomIcon src={Icon_DefaultImg} />
+            <Txt16Bold>고구마</Txt16Bold>
           </LeftMenuItem>
         </InnerLeftMenu>
       </LeftMenu>
