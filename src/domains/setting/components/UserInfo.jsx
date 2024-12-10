@@ -7,10 +7,11 @@ import {
   Txt16Bold,
   Txt20Bold,
 } from "../../../common/common";
+import Icon_DefaultImg from "../../../assets/DefaultImg.svg";
 
 export const UserInfo = () => {
   const fileInputRef = useRef(null);
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(Icon_DefaultImg);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -43,8 +44,8 @@ export const UserInfo = () => {
         <div
           onClick={handlePreviewClick}
           style={{
-            width: "80px",
-            height: "80px",
+            width: "150px",
+            height: "150px",
             borderRadius: "50%",
             backgroundColor: profileImage ? "transparent" : "#e0e0e0",
             backgroundImage: profileImage ? `url(${profileImage})` : "none",
@@ -74,7 +75,7 @@ export const UserInfo = () => {
           <FormTitleContainer>
             <Txt16Bold>이메일</Txt16Bold>
           </FormTitleContainer>
-          <Input value="rkawk@naver.com" />
+          <Input value="rhrnak123@naver.com" />
           <FormTitleContainer>
             <Txt16Bold>연락처</Txt16Bold>
           </FormTitleContainer>
@@ -82,8 +83,7 @@ export const UserInfo = () => {
           <FormTitleContainer>
             <Txt16Bold>이름</Txt16Bold>
           </FormTitleContainer>
-
-          <Input value="감자" />
+          <Input value="고구마123" />
           <div style={{ height: "10px" }} />
         </FlexContainer>
       </FlexContainer>

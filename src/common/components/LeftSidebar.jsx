@@ -13,12 +13,14 @@ import {
   LeftMenu,
   AddButton,
   FlexContainer,
+  LeftSideInput,
 } from "../common";
 import DatePicker from "react-datepicker";
 import Icon_Home from "../../assets/Home.svg";
 import Icon_Directory from "../../assets/Directory.svg";
 import Icon_VerticalMore from "../../assets/VerticalMore.svg";
 import Icon_Trash from "../../assets/Trash.svg";
+import Icon_DefaultImg from "../../assets/DefaultImg.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFolder, getFolders } from "../utils";
@@ -27,11 +29,19 @@ import { useNavigate } from "react-router-dom";
 export const LeftSidebar = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [folderName, setFolderName] = useState("");
 
   const handleNavigateToHome = () => {
     navigate(`/`);
   };
 
+  const handleNavigateToSetting = () => {
+    navigate(`/setting`);
+  };
+
+  const handleFolderInputChange = (e) => {
+    setFolderName(e.target.value);
+  };
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -61,7 +71,7 @@ export const LeftSidebar = () => {
   });
 
   const onClickCreateFolder = async () => {
-    onCreateFolder.mutate("고구마깡은 감자도리리");
+    onCreateFolder.mutate(folderName);
   };
 
   return (
@@ -75,6 +85,10 @@ export const LeftSidebar = () => {
               <CustomIcon src={Icon_Home} />
               <Txt16Bold>홈</Txt16Bold>
             </FlexContainer>
+          </LeftMenuItem>
+          <div style={{ height: "10px"}} />
+          <LeftMenuItem>
+            <LeftSideInput placeholder="폴더명을 입력하세요" value={folderName} onChange={handleFolderInputChange} />
             <AddButton onClick={onClickCreateFolder}>+</AddButton>
           </LeftMenuItem>
           <DirectoryList>
@@ -104,9 +118,9 @@ export const LeftSidebar = () => {
             isClearable
             dateFormat="yyyy/MM/dd"
           />
-          <LeftMenuItem>
-            <CustomIcon src={""} />
-            <Txt16Bold>유저네임</Txt16Bold>
+          <LeftMenuItem onClick={handleNavigateToSetting}>
+            <CustomIcon src={Icon_DefaultImg} />
+            <Txt16Bold>고구마123</Txt16Bold>
           </LeftMenuItem>
         </InnerLeftMenu>
       </LeftMenu>

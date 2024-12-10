@@ -12,11 +12,11 @@ export const createFolder = async (folderName) => {
   return response.data;
 };
 
-export const createMemo = async (noteId, timestamp, text) => {
+export const createMemo = async (memoForm) => {
   const response = await client.post("/memos", {
-    noteId: noteId,
-    timestamp: timestamp,
-    text: text,
+    noteId: memoForm.noteId,
+    timestamp: memoForm.timestamp,
+    text: memoForm.text,
   });
   return response.data;
 };
