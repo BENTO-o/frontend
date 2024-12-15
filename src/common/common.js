@@ -173,6 +173,9 @@ export const DirectoryItem = styled(FlexContainer)`
 export const DirectoryContainer = styled(FlexContainer)`
   width: 13vw;
   cursor: pointer;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: ${(props) => (props.isCurrent ? "#f0f0f0" : "#ffffff")};
 `;
 
 export const DirectoryList = styled(FlexContainer)`
@@ -426,6 +429,7 @@ export const NoteListContainer = styled.div`
   width: 100%;
   margin: 20px;
   padding: 20px;
+  height: 49.5vh;
 `;
 
 export const NoteItemContainer = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   CustomIcon,
   DirectoryContainer,
@@ -22,14 +22,20 @@ import Icon_VerticalMore from "../../assets/VerticalMore.svg";
 import Icon_Trash from "../../assets/Trash.svg";
 import Icon_DefaultImg from "../../assets/DefaultImg.svg";
 import "react-datepicker/dist/react-datepicker.css";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFolder, getFolders } from "../utils";
 import { useNavigate } from "react-router-dom";
+import { useDateStore } from "../../stores/useDate";
+import { useFolderStore } from "../../stores/useFolder";
 
 export const LeftSidebar = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [folderName, setFolderName] = useState("");
+
+  const { startDate, endDate, setStartDate, setEndDate, clearDates } =
+    useDateStore();
+  const { folderId, setFolderId, clearFolder } = useFolderStore();
+  const [folderName, setFolderName] = React.useState("");
 
   const handleNavigateToHome = () => {
     navigate(`/`);
@@ -43,19 +49,11 @@ export const LeftSidebar = () => {
     setFolderName(e.target.value);
   };
 
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  // const [selectedCategory, setSelectedCategory] = useState("");
-
   const { data: folders } = useQuery({
     queryKey: ["folders"],
     queryFn: async () => await getFolders({}),
-    onSuccess: () => {
-      console.log("success");
-    },
-    onError: (e) => {
-      console.error(e);
-    },
+    onSuccess: () => console.log("Folders fetched successfully."),
+    onError: (e) => console.error("Error fetching folders", e),
     refetchOnMount: "always",
   });
 
@@ -65,19 +63,21 @@ export const LeftSidebar = () => {
       console.log(data);
       queryClient.invalidateQueries(["folders"]);
     },
-    onError: (error) => {
-      console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
-    },
+    onError: (error) => console.error("Error creating folder", error),
   });
 
-  const onClickCreateFolder = async () => {
+  const onClickCreateFolder = () => {
     onCreateFolder.mutate(folderName);
+    setFolderName(""); // 입력값 초기화
   };
+
+  useEffect(() => {
+    console.log("Folders updated:", folderId);
+  }, [folderId]);
 
   return (
     <LeftMenuContainer>
       <LeftMenu>
-        {/* 추후에 Logo 컴포넌트로 분리 */}
         <LogoTxt onClick={handleNavigateToHome}>BENTO</LogoTxt>
         <InnerLeftMenu>
           <LeftMenuItem>
@@ -86,15 +86,28 @@ export const LeftSidebar = () => {
               <Txt16Bold>홈</Txt16Bold>
             </FlexContainer>
           </LeftMenuItem>
-          <div style={{ height: "10px"}} />
+          <div style={{ height: "10px" }} />
           <LeftMenuItem>
-            <LeftSideInput placeholder="폴더명을 입력하세요" value={folderName} onChange={handleFolderInputChange} />
+            <LeftSideInput
+              placeholder="폴더명을 입력하세요"
+              value={folderName}
+              onChange={handleFolderInputChange}
+            />
             <AddButton onClick={onClickCreateFolder}>+</AddButton>
           </LeftMenuItem>
           <DirectoryList>
-            {folders?.map((folder, index) => (
-              <DirectoryContainer key={index}>
-                <DirectoryItem>
+            {folders?.map((folder) => (
+              <DirectoryContainer
+                key={folder.forderId}
+                isCurrent={folderId === folder.folderId}
+              >
+                <DirectoryItem
+                  onClick={() => {
+                    folderId === folder.folderId
+                      ? clearFolder()
+                      : setFolderId(folder.folderId);
+                  }}
+                >
                   <CustomIcon src={Icon_Directory} />
                   <Txt16>{folder?.folderName}</Txt16>
                 </DirectoryItem>
@@ -112,11 +125,16 @@ export const LeftSidebar = () => {
 
         <InnerLeftMenu height="40vh" borderTop="1px solid #eeeeee">
           <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            inline
+            selectsRange
+            startDate={startDate}
+            endDate={endDate}
+            onChange={([start, end]) => {
+              setStartDate(start);
+              setEndDate(end);
+            }}
             isClearable
             dateFormat="yyyy/MM/dd"
+            inline
           />
           <LeftMenuItem onClick={handleNavigateToSetting}>
             <CustomIcon src={Icon_DefaultImg} />
