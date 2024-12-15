@@ -20,7 +20,7 @@ export const useCreateNoteFormStore = create((set) => ({
   resetForm: () =>
     set(() => ({
       form: {
-        title: "",
+        title: dayjs().format("YYYY-MM-DD") + "의 새로운 노트",
         folder: "",
         file: null,
         bookmark: [],
