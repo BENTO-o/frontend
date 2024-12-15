@@ -26,11 +26,12 @@ import { RecordUpload } from "./RecordUpload";
 import { Memo } from "../../../common/components/Memo";
 import { NoteField } from "../../../common/components/NoteField";
 import { useCreateNoteFormStore } from "../../../stores/useCreateNoteForm";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../services";
 import { useNavigate } from "react-router-dom";
 
 export const CreateNoteForm = (props) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { form, setFormField, resetForm } = useCreateNoteFormStore(); // zustand 훅 사용하여 form 상태 가져오기
 
@@ -38,8 +39,9 @@ export const CreateNoteForm = (props) => {
     mutationFn: createNote,
     onSuccess: (data) => {
       console.log(data);
+      resetForm();
+      queryClient.invalidateQueries(["noteList"]);
       navigate(`/`);
-
     },
     onError: (error) => {
       console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
