@@ -7,3 +7,10 @@ export const login = async ({ email, password }) => {
   });
   return response.data;
 };
+
+export const logout = async ({ refreshToken }) => {
+  const response = await client.post("/users/logout", {
+    refreshToken: refreshToken,
+  });
+  return response.data;
+};

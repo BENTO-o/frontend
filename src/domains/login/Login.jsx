@@ -36,6 +36,7 @@ function Login() {
     mutationFn: login,
     onSuccess: (data) => {
       sessionStorage.setItem('token', data.accessToken);
+      sessionStorage.setItem('refreshToken', data.refreshToken);
       console.log(data);
       navigate('/');
       window.location.reload();
