@@ -208,7 +208,14 @@ const NoteContent = (props) => {
               padding="10px"
             >
               <AISummaryTitle>AI 요약</AISummaryTitle>
-              <AISummaryText>{summary?.summary}</AISummaryText>
+              <AISummaryText>
+                {summary?.summary.split("\n").map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </AISummaryText>
             </FlexContainer>
           ) : (
             <>AI 요약이 없습니다.</>
