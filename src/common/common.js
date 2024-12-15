@@ -369,6 +369,17 @@ padding: 10px 20px;
   margin-right: 10px;
 `;
 
+export const LogoutBtn = styled.button`
+padding: 10px 20px;
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+`;
+
 export const RollbackBtn = styled(SaveBtn)`
   background-color: #f7f7f7;
   color: #404040;

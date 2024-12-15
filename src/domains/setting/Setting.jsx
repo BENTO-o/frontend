@@ -15,6 +15,7 @@ import {
   SaveBtn,
   Txt24Bold,
   DeleteButton,
+  LogoutBtn,
 } from "../../common/common";
 import { RadioButton } from "../../common/components/RadioButton";
 import { ProgressBar } from "../../common/components/ProgressBar";
@@ -87,8 +88,14 @@ export const Setting = () => {
 
         {/* 이용 현황 */}
         <UsedServiceInfo />
-
-        <DeleteButton onClick={onClickLogoutBtn}>로그아웃</DeleteButton>
+        <FlexContainer
+          width="80%"
+          flexDirection="column"
+          alignItems="flex-start"
+          padding
+        >
+          <LogoutBtn onClick={onClickLogoutBtn}>로그아웃</LogoutBtn>
+        </FlexContainer>
       </FlexContainer>
     </FlexContainer>
   );
