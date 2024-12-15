@@ -54,19 +54,15 @@ export const Setting = () => {
       {/* Left 메뉴 컴포넌트로 분리 */}
       <LeftSidebar />
 
-      <FlexContainer
-        flexDirection="column"
-        width="100%"
-        height="100vh"
-        margin="2rem"
-      >
+      <FlexContainer flexDirection="column" width="100%" height="100%">
         <TopBar />
 
         <FlexContainer
           justifyContent="space-between"
           width="80%"
-          height="90%"
+          height="80vh"
           margin="50px 0 0 0"
+          overflow="scroll"
         >
           <Txt24Bold>서비스 설정</Txt24Bold>
           {/* 버튼 */}
@@ -94,6 +90,9 @@ export const Setting = () => {
           alignItems="flex-start"
           padding
         >
+          <FormTitleContainer>
+            <Txt20Bold>계정 관리</Txt20Bold>
+          </FormTitleContainer>
           <LogoutBtn onClick={onClickLogoutBtn}>로그아웃</LogoutBtn>
         </FlexContainer>
       </FlexContainer>

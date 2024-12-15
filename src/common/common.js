@@ -86,6 +86,7 @@ export const FlexContainer = styled.div`
   padding: ${(props) => props.padding || ""};
   margin: ${(props) => props.margin || ""};
   flex-direction: ${(props) => props.flexDirection || ""};
+  overflow: ${(props) => props.overflow || ""};
 `;
 
 export const SearchbarContainer = styled.div`
@@ -134,6 +135,7 @@ export const TopMenuContainer = styled(FlexContainer)`
   border-bottom: 1px solid #eeeeee;
   margin-left: 1rem;
   margin-right: 1rem;
+  min-height: 70px;
 `;
 
 export const TopMenu = styled(FlexContainer)`
