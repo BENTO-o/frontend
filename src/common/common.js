@@ -446,6 +446,14 @@ export const NoteItemContainer = styled.div`
   }
 `;
 
+export const NoteItemInnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+`;
+
 export const NoteTitle = styled.span`
   flex: 2;
   font-size: 16px;

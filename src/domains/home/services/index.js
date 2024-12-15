@@ -24,3 +24,8 @@ export const getNoteBySearch = async (search) => {
   const response = await client.get(`/notes/search?query=${search}`);
   return response.data;
 }
+
+export const deleteNote = async (noteId) => {
+  const response = await client.delete(`/notes/${noteId}`);
+  return response.data;
+}
