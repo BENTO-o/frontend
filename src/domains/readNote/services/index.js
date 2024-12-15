@@ -24,3 +24,13 @@ export const createBookmark = async (bookmarkForm) => {
   const response = await client.post(`/bookmarks`, bookmarkForm);
   return response.data;
 };
+
+export const deleteBookmark = async (bookmarkId) => {
+  const response = await client.delete(`/bookmarks/${bookmarkId}`);
+  return response.data;
+}
+
+export const deleteMemo = async (memoId) => {
+  const response = await client.delete(`/memos/${memoId}`);
+  return response.data;
+}

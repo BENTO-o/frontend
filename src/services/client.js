@@ -4,6 +4,7 @@ const URL = window.location.href;
 // const baseURL = "http://221.146.234.20:80";
 
 const withCredentials = true;
+// const baseURL = URL.substring(7, 16) === "localhost" ? "http://localhost:8080" : "https://stg.bento-o.site";
 const baseURL = URL.substring(7, 16) === "localhost" ? "http://dev.bento-o.site" : "https://stg.bento-o.site";
 
 const client = axios.create({
@@ -27,4 +28,55 @@ client.interceptors.request.use(
     },
   );
   
-  export default client;
+
+// 응답 인터셉터
+client.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    // 토큰 유효성 검사 실패(401 Unauthorized)
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true; // 재시도 방지 플래그
+
+      try {
+        // Refresh 토큰을 통해 토큰 갱신 요청
+        const refreshToken = sessionStorage.getItem("refreshToken");
+        const { data } = await axios.post(
+          `${baseURL}/users/refresh`, // 갱신 API 엔드포인트
+          { refreshToken: refreshToken },
+          { withCredentials: true }
+        );
+
+        // 새로운 토큰 저장
+        sessionStorage.setItem("token", data.accessToken);
+
+        // Authorization 헤더 업데이트
+        originalRequest.headers["Authorization"] = "Bearer " + data.accessToken;
+
+        // 기존 요청 재시도
+        return client(originalRequest);
+      } catch (refreshError) {
+        console.error("Token refresh failed:", refreshError);
+        // Refresh 실패 시 로그아웃 처리 등 추가 로직
+        const refreshToken = sessionStorage.getItem("refreshToken");
+        const { data } = await axios.post(
+          `${baseURL}/users/logout`,
+          { refreshToken: refreshToken },
+          { withCredentials: true }
+        );
+        console.log("로그아웃 결과:", data);
+        sessionStorage.clear();
+        window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default client;
+

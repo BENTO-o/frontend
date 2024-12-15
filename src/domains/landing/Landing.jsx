@@ -21,9 +21,14 @@ function Landing() {
     navigate('/signup');
   };
 
+  const handleNavigateToHome = () => {
+    navigate(`/`);
+  };
+  
+
   return (
     <PageLayout>
-      <LogoTxt>BENTO</LogoTxt>
+      <LogoTxt onClick={handleNavigateToHome}>BENTO</LogoTxt>
       <CarouselImg
         src="https://img.hankyung.com/photo/202102/AD.25394223.1.jpg"
         // src="./assets/MainCarouselImg.jpg"

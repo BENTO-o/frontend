@@ -86,6 +86,7 @@ export const FlexContainer = styled.div`
   padding: ${(props) => props.padding || ""};
   margin: ${(props) => props.margin || ""};
   flex-direction: ${(props) => props.flexDirection || ""};
+  overflow: ${(props) => props.overflow || ""};
 `;
 
 export const SearchbarContainer = styled.div`
@@ -134,6 +135,7 @@ export const TopMenuContainer = styled(FlexContainer)`
   border-bottom: 1px solid #eeeeee;
   margin-left: 1rem;
   margin-right: 1rem;
+  min-height: 70px;
 `;
 
 export const TopMenu = styled(FlexContainer)`
@@ -173,6 +175,9 @@ export const DirectoryItem = styled(FlexContainer)`
 export const DirectoryContainer = styled(FlexContainer)`
   width: 13vw;
   cursor: pointer;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: ${(props) => (props.isCurrent ? "#f0f0f0" : "#ffffff")};
 `;
 
 export const DirectoryList = styled(FlexContainer)`
@@ -369,6 +374,17 @@ padding: 10px 20px;
   margin-right: 10px;
 `;
 
+export const LogoutBtn = styled.button`
+padding: 10px 20px;
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+`;
+
 export const RollbackBtn = styled(SaveBtn)`
   background-color: #f7f7f7;
   color: #404040;
@@ -415,6 +431,7 @@ export const NoteListContainer = styled.div`
   width: 100%;
   margin: 20px;
   padding: 20px;
+  height: 49.5vh;
 `;
 
 export const NoteItemContainer = styled.div`
@@ -429,6 +446,14 @@ export const NoteItemContainer = styled.div`
   &:last-child {
     border-bottom: none; // 마지막 항목은 경계선을 제거
   }
+`;
+
+export const NoteItemInnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
 `;
 
 export const NoteTitle = styled.span`
