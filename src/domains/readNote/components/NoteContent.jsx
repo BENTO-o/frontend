@@ -31,7 +31,7 @@ import Icon_Bookmark_Yellow from "../../../assets/Bookmark_yellow.svg";
 import Icon_Trash from "../../../assets/Trash.svg";
 import dayjs from "dayjs";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createBookmark, getAISummary } from "../services";
+import { createBookmark, deleteBookmark, getAISummary } from "../services";
 import { createMemo, getMemos } from "../../../common/utils";
 import { useMemos } from "../../../stores/useMemos";
 
@@ -53,7 +53,6 @@ const NoteContent = (props) => {
     queryFn: async () => await getAISummary(props?.noteData?.noteId),
     onSuccess: () => {
       console.log("success");
-      console.log(summary.data);
     },
     onError: (e) => {
       console.error(e);
@@ -72,6 +71,17 @@ const NoteContent = (props) => {
     },
   });
 
+  const onDeleteBookmark = useMutation({
+    mutationFn: deleteBookmark,
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries(["noteData"]);
+    },
+    onError: (error) => {
+      console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
+    },
+  });
+
   const onClickCreteBookmrk = async (timestamp) => {
     onCreateBookmark.mutate({
       noteId: props.noteData?.noteId,
@@ -79,8 +89,13 @@ const NoteContent = (props) => {
     });
   };
 
+  const onClickDeleteBookmrk = async (bookmarkId) => {
+    // console.log(bookmarkId);
+    onDeleteBookmark.mutate(bookmarkId);
+  };
+
   useEffect(() => {
-    // console.log("noteData", props.noteData);
+    console.log("noteData", props.noteData);
     setMemos(props.noteData?.memos);
   }, [props.noteData]);
 
@@ -152,8 +167,11 @@ const NoteContent = (props) => {
               {selectedTimestamp === item.timestamp && (
                 <DividerWithIcon>
                   <LineEEE />
-                  {item.bookmark ? (
-                    <CustomIcon src={Icon_Bookmark_Yellow} onClick={() => {}} />
+                  {item.bookmark.status ? (
+                    <CustomIcon
+                      src={Icon_Bookmark_Yellow}
+                      onClick={() => onClickDeleteBookmrk(item.bookmark.id)}
+                    />
                   ) : (
                     <CustomIcon
                       src={Icon_Bookmark}
