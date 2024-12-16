@@ -1,3 +1,4 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const TxtDefault = styled.span`
@@ -84,6 +85,7 @@ export const LogoTxt = styled(TxtDefault)`
   line-height: 5rem;
   font-weight: 700;
   color: #2563eb;
+  cursor: pointer;
 `;
 
 export const FlexContainer = styled.div`
@@ -176,8 +178,9 @@ export const TopMenuItem = styled.div`
 
 export const LeftMenuItem = styled(FlexContainer)`
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   cursor: pointer;
+  margin-top: 1rem;
 `;
 
 export const DirectoryItem = styled(FlexContainer)`
@@ -305,6 +308,8 @@ export const LoginFormInput = styled.input`
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-left: 10px;
+  margin-left: -10px;
 `;
 
 export const FormCheckbox = styled.input`
@@ -353,12 +358,71 @@ export const VerticalLineEEE = styled.div`
   margin-right: 16px;
 `;
 
+// Hover 시 이미지가 회전하고 확대되는 애니메이션 정의
+const hoverEffect = keyframes`
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(100%);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.1) rotate(3deg);
+    filter: brightness(120%);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scale(1.00) rotate(0deg);
+    filter: brightness(110%);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const shineEffect = keyframes`
+  0% {
+    background-position: -150%;
+  }
+  50% {
+    background-position: 150%;
+  }
+  100% {
+    background-position: -150%;
+  }
+`;
+
 export const CarouselImg = styled.img`
   max-width: 100%;
   max-height: 100%;
   margin-top: 50px;
   margin-bottom: 50px;
   border-radius: 20px;
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+
+  // &:hover {
+  //   transform: scale(1.05); /* 이미지 확대 */
+  //   opacity: 0.9; /* 약간 투명하게 */
+  //   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  // }
+  &:hover {
+    animation: ${hoverEffect} 0.8s ease forwards;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+    background-size: 200% 200%;
+    animation: ${shineEffect} 1.5s infinite;
+    pointer-events: none;
+  }
 `;
 
 export const LoginBtn = styled.button`
@@ -368,16 +432,18 @@ export const LoginBtn = styled.button`
   color: #ffffff;
   border: none;
   border-radius: 20px;
+  cursor: pointer;
 `;
 
 export const SignupBtn = styled(LoginBtn)`
-padding: 10px 20px;
+  padding: 10px 20px;
   background-color: #f7f7f7;
   color: #404040;
+  cursor: pointer;
 `;
 
 export const SaveBtn = styled.button`
-padding: 10px 20px;
+  padding: 10px 20px;
   background-color: #2563eb;
   color: #ffffff;
   border: none;
@@ -385,10 +451,11 @@ padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 export const LogoutBtn = styled.button`
-padding: 10px 20px;
+  padding: 10px 20px;
   background-color: #e74c3c;
   color: #ffffff;
   border: none;
@@ -396,11 +463,13 @@ padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 export const RollbackBtn = styled(SaveBtn)`
   background-color: #f7f7f7;
   color: #404040;
+  cursor: pointer;
 `;
 
 export const LoginCTA = styled.button`
@@ -410,6 +479,12 @@ export const LoginCTA = styled.button`
   color: #ffffff;
   border: none;
   border-radius: 30px;
+  cursor: pointer;
+    &:hover {
+    transform: scale(1.05); /* 이미지 확대 */
+    opacity: 0.9; /* 약간 투명하게 */
+    // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 `;
 
 export const TxtCTA = styled(FlexContainer)`
@@ -419,12 +494,19 @@ export const TxtCTA = styled(FlexContainer)`
   border: none;
   border-radius: 30px;
   margin-top: 20px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05); /* 이미지 확대 */
+    opacity: 0.9; /* 약간 투명하게 */
+    // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 `;
 
 export const ForgetPW = styled.a`
   color: #2563eb;
   font-size: 20px;
   text-decoration: underline;
+  cursor: pointer;
 `;
 
 export const TxtBtn = styled.a`
@@ -432,12 +514,23 @@ export const TxtBtn = styled.a`
   font-size: ${(props) => props.fontSize || "1rem"};
   line-height: ${(props) => props.lineHeight || "1.5rem"};
   text-decoration: underline;
+  &:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1); /* 이미지 확대 */
+    opacity: 0.9; /* 약간 투명하게 */
+    // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 `;
 
 export const CustomIcon = styled.img`
   width: ${(props) => props.width || "1.5rem"};
   height: ${(props) => props.height || "1.5rem"};
   margin-right: ${(props) => props.mr || "0.5rem"};
+  &:hover {
+    transform: scale(1.1); /* 이미지 확대 */
+    opacity: 0.9; /* 약간 투명하게 */
+    // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 `;
 
 export const NoteListContainer = styled.div`
@@ -467,6 +560,11 @@ export const NoteItemInnerContainer = styled.div`
   align-items: center;
   cursor: pointer;
   width: 100%;
+  &:hover {
+    transform: scale(1.05); /* 이미지 확대 */
+    opacity: 0.9; /* 약간 투명하게 */
+    // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  }
 `;
 
 export const NoteTitle = styled.span`
@@ -934,7 +1032,6 @@ export const TagWrapper = styled.div`
   color: #333;
   gap: 5px;
   margin-bottom: 10px;
-
 `;
 
 export const RemoveButton = styled.button`

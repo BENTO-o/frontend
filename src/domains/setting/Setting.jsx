@@ -62,7 +62,7 @@ export const Setting = () => {
           width="80%"
           height="80vh"
           margin="50px 0 0 0"
-          overflow="scroll"
+          // overflow="scroll"
         >
           <Txt24Bold>서비스 설정</Txt24Bold>
           {/* 버튼 */}
