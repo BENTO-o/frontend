@@ -137,6 +137,7 @@ export const LeftSidebar = () => {
             isClearable
             dateFormat="yyyy/MM/dd"
             inline
+            style={{ marginBottom: "20px" }}
           />
           <LeftMenuItem onClick={handleNavigateToSetting}>
             <CustomIcon src={Icon_DefaultImg} />

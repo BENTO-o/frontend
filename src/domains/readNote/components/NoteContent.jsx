@@ -167,7 +167,6 @@ const NoteContent = (props) => {
           <Txt20Bold>음성 기록</Txt20Bold>
           {props.noteData?.content?.script?.map((item, index) => (
             <React.Fragment key={index}>
-              {/* {console.log("item", item)} */}
               <FlexContainer
                 width="100%"
                 alignItems="center"
@@ -178,9 +177,16 @@ const NoteContent = (props) => {
                 borderRadius="8px"
                 justifyContent="flex-start"
                 onClick={() => onChangeTimestamp(item.timestamp)}
+                style={{
+                  cursor: "pointer",
+                }}
               >
                 {/* <RecordIcon src={Icon_DefaultImg} /> */}
-                <SpeakerBox background={speakerColors[item.speaker.substring(8, 9)-1]}>{item.speaker.substring(8, 9)}</SpeakerBox>
+                <SpeakerBox
+                  background={speakerColors[item.speaker.substring(8, 9) - 1]}
+                >
+                  {item.speaker.substring(8, 9)}
+                </SpeakerBox>
                 <FlexContainer
                   flexDirection="column"
                   alignItems="flex-start"
