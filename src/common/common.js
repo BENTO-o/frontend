@@ -66,6 +66,19 @@ export const Txt24Bold = styled.span`
   line-height: 2rem; /* 32px */
 `;
 
+export const SpeakerBox = styled.p`
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5rem; /* 20px */
+  font-weight: 500;
+  background: ${(props) => props.background || ""};
+  color: ${(props) => props.color || ""};
+  text-align: center;
+  border-radius: 2rem;
+  margin-right: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+`;
+
 export const LogoTxt = styled(TxtDefault)`
   font-size: 3rem;
   line-height: 5rem;
