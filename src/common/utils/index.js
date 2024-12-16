@@ -25,3 +25,8 @@ export const getMemos = async (noteId) => {
   const response = await client.get(`/memos/note/${noteId}`);
   return response.data;
 }
+
+export const getUser = async () => {
+  const response = await client.get(`/users/me`);
+  return response.data;
+}

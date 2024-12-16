@@ -8,9 +8,12 @@ import {
   Txt20Bold,
 } from "../../../common/common";
 import Icon_DefaultImg from "../../../assets/DefaultImg.svg";
+import { useUserStore } from "../../../stores/useUser";
 
 export const UserInfo = () => {
   const fileInputRef = useRef(null);
+  const { user, setUser } = useUserStore(); // zustand 훅 사용하여 form 상태 가져오기
+
   const [profileImage, setProfileImage] = useState(Icon_DefaultImg);
 
   const handleImageUpload = (event) => {
@@ -75,15 +78,15 @@ export const UserInfo = () => {
           <FormTitleContainer>
             <Txt16Bold>이메일</Txt16Bold>
           </FormTitleContainer>
-          <Input value="rhrnak123@naver.com" />
-          <FormTitleContainer>
+          <Input value={user.email} />
+          {/* <FormTitleContainer>
             <Txt16Bold>연락처</Txt16Bold>
           </FormTitleContainer>
-          <Input value="010-5555-4444" />
+          <Input value={user.email} /> */}
           <FormTitleContainer>
             <Txt16Bold>이름</Txt16Bold>
           </FormTitleContainer>
-          <Input value="고구마123" />
+          <Input value={user.username} />
           <div style={{ height: "10px" }} />
         </FlexContainer>
       </FlexContainer>

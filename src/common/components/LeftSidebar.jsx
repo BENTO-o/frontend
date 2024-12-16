@@ -27,6 +27,7 @@ import { createFolder, getFolders } from "../utils";
 import { useNavigate } from "react-router-dom";
 import { useDateStore } from "../../stores/useDate";
 import { useFolderStore } from "../../stores/useFolder";
+import { useUserStore } from "../../stores/useUser";
 
 export const LeftSidebar = () => {
   const queryClient = useQueryClient();
@@ -34,6 +35,7 @@ export const LeftSidebar = () => {
 
   const { startDate, endDate, setStartDate, setEndDate, clearDates } =
     useDateStore();
+  const { user, setUser } = useUserStore(); // zustand 훅 사용하여 form 상태 가져오기
   const { folderId, setFolderId, clearFolder } = useFolderStore();
   const [folderName, setFolderName] = React.useState("");
 
@@ -138,7 +140,7 @@ export const LeftSidebar = () => {
           />
           <LeftMenuItem onClick={handleNavigateToSetting}>
             <CustomIcon src={Icon_DefaultImg} />
-            <Txt16Bold>고구마123</Txt16Bold>
+            <Txt16Bold>{user?.username}</Txt16Bold>
           </LeftMenuItem>
         </InnerLeftMenu>
       </LeftMenu>

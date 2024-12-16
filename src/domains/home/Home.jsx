@@ -7,22 +7,26 @@ import { LeftSidebar } from "../../common/components/LeftSidebar";
 import { TopBar } from "../../common/components/TopBar";
 import { Carousel } from "../../common/components/Carousel";
 import { NoteList } from "./components/NoteList";
+import { getUser } from "../../common/utils";
+import { useUserStore } from "../../stores/useUser";
 
 function Home() {
+  const { user, setUser } = useUserStore(); // zustand 훅 사용하여 form 상태 가져오기
 
-  // const onCreate = useMutation({
-  //   mutationFn: createNote,
-  //   onSuccess: (data) => {
-  //     console.log(data);
-  //   },
-  //   onError: (error) => {
-  //     console.log("에러 발생! 아래 메시지를 확인해주세요.", error);
-  //   },
-  // });
+  const { data: users } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUser,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.error("Error fetching notes:", error);
+    },
+  });
 
-  // const onClickCreate = async () => {
-  //   onCreate.mutate();
-  // };
+  useEffect(() => {
+    setUser(users);
+  }, [users]);
 
   return (
     <FlexContainer width="100vw" height="100vh">
@@ -39,8 +43,7 @@ function Home() {
 
         <Carousel />
 
-        <NoteList/>
-        
+        <NoteList />
       </FlexContainer>
     </FlexContainer>
   );
