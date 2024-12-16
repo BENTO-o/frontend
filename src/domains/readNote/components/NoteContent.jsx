@@ -20,8 +20,10 @@ import {
   RecordIcon,
   RecordItem,
   RecordText,
+  SpeakerBox,
   Title,
   TitleSection,
+  Txt18Bold,
   Txt20Bold,
   Txt24Bold,
   VerticalLineEEE,
@@ -40,6 +42,8 @@ const NoteContent = (props) => {
   const queryClient = useQueryClient();
 
   const [selectedTimestamp, setSelectedTimestamp] = useState("");
+  const [speakerColors, setSpeakerColors] = useState([]);
+
   const { memos, setMemos } = useMemos(); // zustand 훅 사용하여 form 상태 가져오기
 
   const onChangeTimestamp = (timestamp) => {
@@ -94,10 +98,31 @@ const NoteContent = (props) => {
     onDeleteBookmark.mutate(bookmarkId);
   };
 
+  const generateRandomColor = () => {
+    // 랜덤 색상 생성
+    const letters = "0123456789ABCDEF"; // 16진수 값
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   useEffect(() => {
     console.log("noteData", props.noteData);
     setMemos(props.noteData?.memos);
   }, [props.noteData]);
+
+  // noteData.speaker에 대한 색상 배열 초기화
+  useEffect(() => {
+    console.log("noteData", props.noteData.content.speaker);
+    if (props.noteData?.content.speaker) {
+      const uniqueSpeakers = [...new Set(props.noteData.content.speaker)];
+      const colors = uniqueSpeakers.map(() => generateRandomColor());
+      console.log("colors", colors);
+      setSpeakerColors(colors);
+    }
+  }, []);
 
   return (
     <FlexContainer
@@ -142,6 +167,7 @@ const NoteContent = (props) => {
           <Txt20Bold>음성 기록</Txt20Bold>
           {props.noteData?.content?.script?.map((item, index) => (
             <React.Fragment key={index}>
+              {/* {console.log("item", item)} */}
               <FlexContainer
                 width="100%"
                 alignItems="center"
@@ -153,8 +179,8 @@ const NoteContent = (props) => {
                 justifyContent="flex-start"
                 onClick={() => onChangeTimestamp(item.timestamp)}
               >
-                <RecordIcon src={Icon_DefaultImg} />
-
+                {/* <RecordIcon src={Icon_DefaultImg} /> */}
+                <SpeakerBox background={speakerColors[item.speaker.substring(8, 9)-1]}>{item.speaker.substring(8, 9)}</SpeakerBox>
                 <FlexContainer
                   flexDirection="column"
                   alignItems="flex-start"
