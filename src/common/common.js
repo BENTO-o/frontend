@@ -481,7 +481,6 @@ export const LoginCTA = styled.button`
   border-radius: 30px;
   cursor: pointer;
     &:hover {
-    background-color: #f0f0f0;
     transform: scale(1.05); /* 이미지 확대 */
     opacity: 0.9; /* 약간 투명하게 */
     // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
@@ -497,7 +496,6 @@ export const TxtCTA = styled(FlexContainer)`
   margin-top: 20px;
   cursor: pointer;
   &:hover {
-    background-color: #f0f0f0;
     transform: scale(1.05); /* 이미지 확대 */
     opacity: 0.9; /* 약간 투명하게 */
     // box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
